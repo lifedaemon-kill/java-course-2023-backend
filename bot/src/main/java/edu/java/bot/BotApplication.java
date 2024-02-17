@@ -4,6 +4,7 @@ import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
 import edu.java.bot.configurations.ApplicationConfig;
 import edu.java.bot.controllers.BotController;
+import edu.java.bot.utilities.Token;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,7 +23,7 @@ public class BotApplication {
         var bot = new TelegramBot(config.telegramToken());
 
         bot.setUpdatesListener(updates -> {
-            log.info(updates);
+            //log.info(updates);
             BotController.process(updates, bot);
 
             return UpdatesListener.CONFIRMED_UPDATES_ALL;
