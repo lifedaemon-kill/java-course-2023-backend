@@ -3,8 +3,8 @@ package edu.java.bot.controllers;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Update;
 import edu.java.bot.commands.StartBotCmd;
-import edu.java.bot.handlers.WaitActHandle;
-import edu.java.bot.handlers.WaitMesHandle;
+import edu.java.bot.handlers.WaitActHandler;
+import edu.java.bot.handlers.WaitMesHandler;
 import edu.java.bot.models.DialogState;
 import edu.java.bot.models.UsersDB;
 import java.util.List;
@@ -30,12 +30,12 @@ public class BotController {
             }
             //Состояние ожидания сообщения (По умолчанию)
             if (UsersDB.dialogState.get(id) == DialogState.WaitMessage) {
-                var command = WaitMesHandle.handle(update);
+                var command = WaitMesHandler.handle(update);
                 bot.execute(command.process());
             }
             //Особые состояния
             else {
-                var command = WaitActHandle.handle(update);
+                var command = WaitActHandler.handle(update);
                 bot.execute(command.process());
             }
         }
