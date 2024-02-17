@@ -24,7 +24,7 @@ public class LinkParse {
         try {
             url = new URI(link);
             String urlDomain = url.getHost();
-            log.info("Ссылка" + urlDomain + " " + SupportsDomains.list.contains(urlDomain));
+            log.debug("Ссылка " + urlDomain + " " + SupportsDomains.list.contains(urlDomain));
             return SupportsDomains.list.contains(urlDomain);
         } catch (Exception ignore) {
             return false;
