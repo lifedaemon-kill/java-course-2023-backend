@@ -16,7 +16,8 @@ public class HelpBotCmd extends BotCmd {
 
             /start - Регистрация пользователя (Обнуление ссылок и состояния)
 
-            /track - Добавить ссылку для отслеживания\nПоддерживаются только сайты GitHub.com и StackOverflow.com
+            /track - Добавить ссылку для отслеживания
+            Поддерживаются только сайты GitHub.com и StackOverflow.com
 
             /untrack - Удалить ссылку из отслеживания
 
