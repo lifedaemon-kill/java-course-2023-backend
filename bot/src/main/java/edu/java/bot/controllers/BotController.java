@@ -17,9 +17,13 @@ import static edu.java.bot.utilities.StringCommand.START;
 public class BotController {
     public static void process(List<Update> updateList, TelegramBot bot) {
         for (Update update : updateList) {
+            if (update.message() == null
+                || update.message().text() == null
+                || update.message().text().isEmpty())
+                continue;
             String text = update.message().text();
             Long id = update.message().chat().id();
-            log.info(text);
+            log.debug(text + " " + update.message().chat().firstName() + " " + update.message().chat().username() + " " + update.message().chat().id());
             //Первый запуск
             if (text.equals(START)
                 || !UsersDB.dialogState.containsKey(id)
