@@ -2,6 +2,7 @@ package edu.java.bot;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
+import edu.java.bot.configurations.ApplicationConfig;
 import edu.java.bot.controllers.BotController;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.SpringApplication;
@@ -15,9 +16,10 @@ public class BotApplication {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(BotApplication.class, args);
 
-        String BOT_TOKEN = getTelegramToken();
-        log.debug(BOT_TOKEN);
-        var bot = new TelegramBot(BOT_TOKEN);
+        ApplicationConfig config = new ApplicationConfig(getTelegramToken());
+        log.debug(config.telegramToken());
+
+        var bot = new TelegramBot(config.telegramToken());
 
         bot.setUpdatesListener(updates -> {
             log.info(updates);
