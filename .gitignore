@@ -3,6 +3,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### Configs ###
+/bot/src/main/resources/application.yml
+/bot/src/main/resources/token
+
 ### STS ###
 .apt_generated
 .classpath
