@@ -1,7 +1,7 @@
 package edu.java.bot.utilities;
 
 public class StringCommand {
-    public static final String START = "/string";
+    public static final String START = "/start";
     public static final String TRACK = "/track";
     public static final String UNTRACK = "/untrack";
     public static final String HELP = "/help";
