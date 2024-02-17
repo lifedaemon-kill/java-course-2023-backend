@@ -3,13 +3,13 @@ package edu.java.bot.commands;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import edu.java.bot.models.DialogState;
-import edu.java.bot.models.UsersDB;
+import edu.java.bot.models.DataBase;
 import java.util.ArrayList;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-public class StartBotCmd extends BotCmd {
-    public StartBotCmd(Update update) {
+public class StartCommand extends Command {
+    public StartCommand(Update update) {
         super(update);
     }
 
@@ -21,8 +21,8 @@ public class StartBotCmd extends BotCmd {
 
     @Override
     public SendMessage process() {
-        UsersDB.dialogState.put(id, DialogState.WaitMessage);
-        UsersDB.urlList.put(id, new ArrayList<>());
+        DataBase.dialogState.put(id, DialogState.WaitMessage);
+        DataBase.urlList.put(id, new ArrayList<>());
 
         log.info("Зарегистрирован пользователь %s".formatted(id));
         return new SendMessage(id, this.message);

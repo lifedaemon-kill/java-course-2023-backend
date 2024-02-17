@@ -3,8 +3,7 @@ package edu.java.bot;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
 import edu.java.bot.configurations.ApplicationConfig;
-import edu.java.bot.controllers.BotController;
-import edu.java.bot.utilities.Token;
+import edu.java.bot.controllers.Controller;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,7 +23,7 @@ public class BotApplication {
 
         bot.setUpdatesListener(updates -> {
             //log.info(updates);
-            BotController.process(updates, bot);
+            Controller.process(updates, bot);
 
             return UpdatesListener.CONFIRMED_UPDATES_ALL;
         }, e -> {

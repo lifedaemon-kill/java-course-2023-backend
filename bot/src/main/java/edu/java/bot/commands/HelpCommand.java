@@ -3,8 +3,8 @@ package edu.java.bot.commands;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 
-public class HelpBotCmd extends BotCmd {
-    public HelpBotCmd(Update update) {
+public class HelpCommand extends Command {
+    public HelpCommand(Update update) {
         super(update);
     }
 

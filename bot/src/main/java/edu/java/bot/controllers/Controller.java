@@ -2,11 +2,11 @@ package edu.java.bot.controllers;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Update;
-import edu.java.bot.commands.StartBotCmd;
+import edu.java.bot.commands.StartCommand;
 import edu.java.bot.handlers.WaitActHandler;
 import edu.java.bot.handlers.WaitMesHandler;
 import edu.java.bot.models.DialogState;
-import edu.java.bot.models.UsersDB;
+import edu.java.bot.models.DataBase;
 import java.util.List;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ import static edu.java.bot.utilities.StringCommand.START;
 
 @Log4j2
 @Component
-public class BotController {
+public class Controller {
     public static void process(List<Update> updateList, TelegramBot bot) {
         for (Update update : updateList) {
             if (update.message() == null
@@ -26,14 +26,14 @@ public class BotController {
             log.debug(text + " " + update.message().chat().firstName() + " " + update.message().chat().username() + " " + update.message().chat().id());
             //Первый запуск
             if (text.equals(START)
-                || !UsersDB.dialogState.containsKey(id)
-                || !UsersDB.urlList.containsKey(id)) {
-                var command = new StartBotCmd(update);
+                || !DataBase.dialogState.containsKey(id)
+                || !DataBase.urlList.containsKey(id)) {
+                var command = new StartCommand(update);
                 bot.execute(command.process());
                 continue;
             }
             //Состояние ожидания сообщения (По умолчанию)
-            if (UsersDB.dialogState.get(id) == DialogState.WaitMessage) {
+            if (DataBase.dialogState.get(id) == DialogState.WaitMessage) {
                 var command = WaitMesHandler.handle(update);
                 bot.execute(command.process());
             }

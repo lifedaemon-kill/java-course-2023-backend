@@ -1,15 +1,15 @@
 package edu.java.bot.handlers;
 
 import com.pengrad.telegrambot.model.Update;
-import edu.java.bot.commands.AddURLBotCmd;
-import edu.java.bot.commands.BotCmd;
-import edu.java.bot.commands.DeleteURLBotCmd;
-import edu.java.bot.commands.HelpBotCmd;
-import edu.java.bot.commands.ListBotCmd;
-import edu.java.bot.commands.StartBotCmd;
-import edu.java.bot.commands.UnknownBotCmd;
+import edu.java.bot.commands.AddURLCommand;
+import edu.java.bot.commands.Command;
+import edu.java.bot.commands.DeleteURLCommand;
+import edu.java.bot.commands.HelpCommand;
+import edu.java.bot.commands.ListCommand;
+import edu.java.bot.commands.StartCommand;
+import edu.java.bot.commands.UnknownCommand;
 import edu.java.bot.models.DialogState;
-import edu.java.bot.models.UsersDB;
+import edu.java.bot.models.DataBase;
 import static edu.java.bot.utilities.StringCommand.HELP;
 import static edu.java.bot.utilities.StringCommand.LIST;
 import static edu.java.bot.utilities.StringCommand.START;
@@ -18,33 +18,33 @@ import static edu.java.bot.utilities.StringCommand.UNTRACK;
 
 public class WaitMesHandler extends Handler {
 
-    public static BotCmd handle(Update update) {
+    public static Command handle(Update update) {
         return switch (update.message().text()) {
             case START:
-                yield new StartBotCmd(update);
+                yield new StartCommand(update);
 
             case HELP:
-                yield new HelpBotCmd(update);
+                yield new HelpCommand(update);
 
             case TRACK:
-                UsersDB.dialogState.put(
+                DataBase.dialogState.put(
                     update.message().chat().id(),
                     DialogState.WaitURLToAdd
                 );
-                yield new AddURLBotCmd(update);
+                yield new AddURLCommand(update);
 
             case UNTRACK:
-                UsersDB.dialogState.put(
+                DataBase.dialogState.put(
                     update.message().chat().id(),
                     DialogState.WaitURLToDelete
                 );
-                yield new DeleteURLBotCmd(update);
+                yield new DeleteURLCommand(update);
 
             case LIST:
-                yield new ListBotCmd(update);
+                yield new ListCommand(update);
 
             default:
-                yield new UnknownBotCmd(update);
+                yield new UnknownCommand(update);
         };
     }
 }

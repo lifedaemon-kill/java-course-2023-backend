@@ -3,8 +3,8 @@ package edu.java.bot.commands;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 
-public class UnknownBotCmd extends BotCmd {
-    public UnknownBotCmd(Update update) {
+public class UnknownCommand extends Command {
+    public UnknownCommand(Update update) {
         super(update);
     }
 
