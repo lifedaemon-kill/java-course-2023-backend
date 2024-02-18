@@ -1,10 +1,9 @@
 package edu.java.bot.utilities;
 
 import edu.java.bot.models.SupportsDomains;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
+
+import java.net.*;
+
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -16,9 +15,9 @@ public class LinkParse {
 
     public static boolean isURL(String text) {
         try {
-            new URI(text);
+            new URI(text).toURL();
             return true;
-        } catch (URISyntaxException e) {
+        } catch (Exception e) {
             return false;
         }
     }
@@ -41,7 +40,7 @@ public class LinkParse {
     public static boolean isResourceAvailable(String url) {
 
         try {
-            URL link = new URL(url);
+            URL link = new URI(url).toURL();
             HttpURLConnection connection = (HttpURLConnection) link.openConnection();
             connection.setRequestMethod("GET");
             int statusCode = connection.getResponseCode();

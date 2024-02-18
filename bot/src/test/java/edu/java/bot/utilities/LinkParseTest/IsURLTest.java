@@ -1,4 +1,4 @@
-package edu.LinkParse;
+package edu.java.bot.utilities.LinkParseTest;
 
 import edu.java.bot.utilities.LinkParse;
 import org.junit.jupiter.api.Test;

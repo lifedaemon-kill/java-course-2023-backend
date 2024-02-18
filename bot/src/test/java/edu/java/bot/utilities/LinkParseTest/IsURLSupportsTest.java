@@ -1,13 +1,12 @@
-package edu.LinkParse;
+package edu.java.bot.utilities.LinkParseTest;
 
 import edu.java.bot.utilities.LinkParse;
-import java.net.URISyntaxException;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Log4j2
-public class IsSupportsTest {
+public class IsURLSupportsTest {
     @Test
     public void test1() {
         String url = "https://github.com/lifedaemon-kill/";

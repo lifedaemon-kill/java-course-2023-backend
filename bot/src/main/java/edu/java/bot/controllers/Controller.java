@@ -18,7 +18,7 @@ public class Controller {
     private Controller() {
     }
 
-    public static void process(List<Update> updateList, TelegramBot bot) {
+    public static void process(List<Update> updateList, TelegramBot bot, DataBase dataBase) {
         for (Update update : updateList) {
             if (update.message() == null
                 || update.message().text() == null
@@ -33,21 +33,21 @@ public class Controller {
                 + " " + update.message().chat().id());
             //Первый запуск
             if (text.equals(START)
-                || !DataBase.dialogState.containsKey(id)
-                || !DataBase.urlList.containsKey(id)) {
+                || !dataBase.getDialogState().containsKey(id)
+                || !dataBase.getUrlList().containsKey(id)) {
                 var command = new StartCommand(update);
-                bot.execute(command.process());
+                bot.execute(command.process(dataBase));
                 continue;
             }
 
-            if (DataBase.dialogState.get(id) == DialogState.WaitMessage) {
+            if (dataBase.getDialogState().get(id) == DialogState.WaitMessage) {
                 //Состояние ожидания сообщения (По умолчанию)
-                var command = WaitMesHandler.handle(update);
-                bot.execute(command.process());
+                var command = WaitMesHandler.handle(update, dataBase);
+                bot.execute(command.process(dataBase));
             } else {
                 //Особые состояния
-                var command = WaitActHandler.handle(update);
-                bot.execute(command.process());
+                var command = WaitActHandler.handle(update, dataBase);
+                bot.execute(command.process(dataBase));
             }
         }
     }

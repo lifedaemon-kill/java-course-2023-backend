@@ -16,19 +16,19 @@ public class AddURLCommand extends Command {
     }
 
     @Override
-    public SendMessage process() {
+    public SendMessage process(DataBase dataBase) {
         if (text.equals(TRACK)) {
             return new SendMessage(id, "Введите ссылку");
         }
-        SendMessage message = isPossibleToAdd(); //Производится проверка на Wait
-        DataBase.dialogState.put(id, DialogState.WaitMessage);
+        SendMessage message = isPossibleToAdd(dataBase); //Производится проверка на Wait
+        dataBase.getDialogState().put(id, DialogState.WaitMessage);
 
         if (message == null) {
             //если прошла валидация
             try {
                 URI url = new URI(text);
                 //Добавление ссылки в базу
-                DataBase.urlList.get(id).add(url);
+                dataBase.getUrlList().get(id).add(url);
             } catch (Exception e) {
                 log.error("Непредвиденная ошибка в Add process");
                 log.error(e.getMessage());
@@ -43,11 +43,11 @@ public class AddURLCommand extends Command {
     }
 
     @SuppressWarnings("ReturnCount")
-    public SendMessage isPossibleToAdd() {
+    public SendMessage isPossibleToAdd(DataBase dataBase) {
         Long id = update.message().chat().id();
-        DialogState state = DataBase.dialogState.get(id);
+        DialogState state = dataBase.getDialogState().get(id);
 
-        if (!DataBase.dialogState.containsKey(id) || !DataBase.urlList.containsKey(id)) {
+        if (!dataBase.getDialogState().containsKey(id) || !dataBase.getUrlList().containsKey(id)) {
             return new SendMessage(id, "Пользователь не зарегистрирован, используйте /start");
         }
 

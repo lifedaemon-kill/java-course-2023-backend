@@ -18,7 +18,7 @@ import static edu.java.bot.utilities.StringCommand.UNTRACK;
 
 public class WaitMesHandler extends Handler {
 
-    public static Command handle(Update update) {
+    public static Command handle(Update update, DataBase dataBase) {
         return switch (update.message().text()) {
             case START:
                 yield new StartCommand(update);
@@ -27,14 +27,14 @@ public class WaitMesHandler extends Handler {
                 yield new HelpCommand(update);
 
             case TRACK:
-                DataBase.dialogState.put(
+                dataBase.getDialogState().put(
                     update.message().chat().id(),
                     DialogState.WaitURLToAdd
                 );
                 yield new AddURLCommand(update);
 
             case UNTRACK:
-                DataBase.dialogState.put(
+                dataBase.getDialogState().put(
                     update.message().chat().id(),
                     DialogState.WaitURLToDelete
                 );

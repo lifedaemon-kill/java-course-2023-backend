@@ -20,9 +20,9 @@ public class StartCommand extends Command {
             .formatted(update.message().chat().firstName());
 
     @Override
-    public SendMessage process() {
-        DataBase.dialogState.put(id, DialogState.WaitMessage);
-        DataBase.urlList.put(id, new ArrayList<>());
+    public SendMessage process(DataBase dataBase) {
+        dataBase.getDialogState().put(id, DialogState.WaitMessage);
+        dataBase.getUrlList().put(id, new ArrayList<>());
 
         log.info("Зарегистрирован пользователь %s".formatted(id));
         return new SendMessage(id, this.message);

@@ -13,8 +13,8 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public SendMessage process() {
-        List<URI> list = DataBase.urlList.get(id);
+    public SendMessage process(DataBase dataBase) {
+        List<URI> list = dataBase.getUrlList().get(id);
 
         if (list.isEmpty()) {
             return new SendMessage(id, "Список адресов пуст, вы можете добавить ссылки используя /track");
