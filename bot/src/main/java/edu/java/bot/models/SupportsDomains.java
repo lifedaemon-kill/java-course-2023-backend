@@ -4,11 +4,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class SupportsDomains {
-    public static final Set<String> list = new HashSet<>();
+    public static final Set<String> STRING_SET = new HashSet<>();
 
     static {
-        list.add("stackoverflow.com");
-        list.add("github.com");
+        STRING_SET.add("stackoverflow.com");
+        STRING_SET.add("github.com");
     }
 
     private SupportsDomains() {

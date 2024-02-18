@@ -2,8 +2,8 @@ package edu.java.bot.commands;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
-import edu.java.bot.models.DialogState;
 import edu.java.bot.models.DataBase;
+import edu.java.bot.models.DialogState;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;

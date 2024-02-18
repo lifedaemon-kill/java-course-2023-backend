@@ -8,10 +8,10 @@ public class UnknownCommand extends Command {
         super(update);
     }
 
-    private static final String message = "Данная команда отсутствует, воспользуйтесь меню или командой /help";
+    private static final String MESSAGE = "Данная команда отсутствует, воспользуйтесь меню или командой /help";
 
     @Override
     public SendMessage process() {
-        return new SendMessage(id, message);
+        return new SendMessage(id, MESSAGE);
     }
 }

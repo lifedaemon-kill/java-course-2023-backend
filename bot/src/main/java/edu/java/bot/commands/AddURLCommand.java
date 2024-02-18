@@ -2,8 +2,8 @@ package edu.java.bot.commands;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
-import edu.java.bot.models.DialogState;
 import edu.java.bot.models.DataBase;
+import edu.java.bot.models.DialogState;
 import edu.java.bot.utilities.LinkParse;
 import java.net.URI;
 import lombok.extern.log4j.Log4j2;
@@ -42,6 +42,7 @@ public class AddURLCommand extends Command {
         }
     }
 
+    @SuppressWarnings("ReturnCount")
     public SendMessage isPossibleToAdd() {
         Long id = update.message().chat().id();
         DialogState state = DataBase.dialogState.get(id);
@@ -59,8 +60,9 @@ public class AddURLCommand extends Command {
         if (!LinkParse.isURLSupports(text)) {
             return new SendMessage(id, "Данный ресурс не поддерживается");
         }
-        if (!LinkParse.isResourceAvailable(text))
+        if (!LinkParse.isResourceAvailable(text)) {
             return new SendMessage(id, "Данный ресурс не пингуется");
+        }
         return null;
     }
 }

@@ -7,8 +7,8 @@ import edu.java.bot.commands.DeleteURLCommand;
 import edu.java.bot.models.DataBase;
 
 public class WaitActHandler extends Handler {
-    public static Command handle (Update update){
-        return switch (DataBase.dialogState.get(update.message().chat().id())){
+    public static Command handle(Update update) {
+        return switch (DataBase.dialogState.get(update.message().chat().id())) {
             case WaitMessage -> Handler.handle(update);
             case WaitURLToAdd -> new AddURLCommand(update);
             case WaitURLToDelete -> new DeleteURLCommand(update);

@@ -1,9 +1,9 @@
 package edu.java.bot.models;
 
-import org.springframework.context.annotation.Description;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
+import org.springframework.context.annotation.Description;
 
 @Description("Имитация базы данных")
 public class DataBase {
