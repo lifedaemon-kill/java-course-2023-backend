@@ -18,7 +18,7 @@ public class HelpCommand extends Command {
             /start - Регистрация пользователя (Обнуление ссылок и состояния)
 
             /track - Добавить ссылку для отслеживания
-            Поддерживаются только сайты GitHub.com и StackOverflow.com
+            Поддерживаются только сайты github.com и stackoverflow.com
 
             /untrack - Удалить ссылку из отслеживания
 
