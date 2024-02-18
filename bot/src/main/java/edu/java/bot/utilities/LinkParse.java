@@ -15,7 +15,7 @@ public class LinkParse {
 
     public static boolean isURL(String text) {
         try {
-            new URI(text).toURL();
+            var ignore = new URI(text).toURL();
             return true;
         } catch (Exception e) {
             return false;
