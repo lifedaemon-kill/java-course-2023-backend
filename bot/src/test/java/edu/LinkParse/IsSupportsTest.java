@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class IsSupportsTest {
     @Test
     public void test1() {
-        String url = "https://stackoverflow.com/questions/123456";
+        String url = "https://github.com/lifedaemon-kill/";
         boolean response = LinkParse.isURLSupports(url);
         assertThat(response).isTrue();
     }
@@ -23,7 +23,7 @@ public class IsSupportsTest {
     }
     @Test
     public void test3() {
-        String url = "https://github.com/questions/1256";
+        String url = "https://github.com/lifedaemon-kill/java-course-2023-backend";
         boolean response = LinkParse.isURLSupports(url);
         assertThat(response).isTrue();
     }
