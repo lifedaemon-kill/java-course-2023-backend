@@ -61,7 +61,7 @@ public class AddURLCommand extends Command {
             return new SendMessage(id, "Данный ресурс не поддерживается");
         }
         if (!LinkParse.isResourceAvailable(text)) {
-            return new SendMessage(id, "Данный ресурс не пингуется");
+            return new SendMessage(id, "Не удалось подключиться к данному ресурсу");
         }
         return null;
     }
