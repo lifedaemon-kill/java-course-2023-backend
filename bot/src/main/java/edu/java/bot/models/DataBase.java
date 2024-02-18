@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Description;
 public class DataBase {
     private HashMap<Long, DialogState> dialogState = new HashMap<>();
     private HashMap<Long, List<URI>> urlList = new HashMap<>();
+
     public DataBase() {
     }
 }

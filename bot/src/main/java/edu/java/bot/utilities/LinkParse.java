@@ -1,9 +1,9 @@
 package edu.java.bot.utilities;
 
 import edu.java.bot.models.SupportsDomains;
-
-import java.net.*;
-
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
