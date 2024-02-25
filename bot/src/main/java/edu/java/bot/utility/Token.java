@@ -1,10 +1,11 @@
 package edu.java.bot.utility;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 @Log4j2
 @Service
 public class Token {
