@@ -1,10 +1,11 @@
-package edu.java.bot.models;
+package edu.java.bot.model;
 
 import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Description;
 
 @Description("Имитация базы данных")

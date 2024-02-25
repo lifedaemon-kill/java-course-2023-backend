@@ -1,13 +1,13 @@
-package edu.java.bot.commands;
+package edu.java.bot.command;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
-import edu.java.bot.models.DataBase;
+import edu.java.bot.model.DataBase;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 
-public class ListCommand extends Command {
+public class ListCommand extends BaseCommand {
     public ListCommand(Update update) {
         super(update);
     }

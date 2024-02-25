@@ -1,24 +1,25 @@
-package edu.java.bot.handlers;
+package edu.java.bot.handler;
 
 import com.pengrad.telegrambot.model.Update;
-import edu.java.bot.commands.AddURLCommand;
-import edu.java.bot.commands.Command;
-import edu.java.bot.commands.DeleteURLCommand;
-import edu.java.bot.commands.HelpCommand;
-import edu.java.bot.commands.ListCommand;
-import edu.java.bot.commands.StartCommand;
-import edu.java.bot.commands.UnknownCommand;
-import edu.java.bot.models.DataBase;
-import edu.java.bot.models.DialogState;
-import static edu.java.bot.utilities.StringCommand.HELP;
-import static edu.java.bot.utilities.StringCommand.LIST;
-import static edu.java.bot.utilities.StringCommand.START;
-import static edu.java.bot.utilities.StringCommand.TRACK;
-import static edu.java.bot.utilities.StringCommand.UNTRACK;
-
+import edu.java.bot.command.AddURLCommand;
+import edu.java.bot.command.BaseCommand;
+import edu.java.bot.command.DeleteURLCommand;
+import edu.java.bot.command.HelpCommand;
+import edu.java.bot.command.ListCommand;
+import edu.java.bot.command.StartCommand;
+import edu.java.bot.command.UnknownCommand;
+import edu.java.bot.model.DataBase;
+import edu.java.bot.model.DialogState;
+import org.springframework.stereotype.Service;
+import static edu.java.bot.utility.StringCommand.HELP;
+import static edu.java.bot.utility.StringCommand.LIST;
+import static edu.java.bot.utility.StringCommand.START;
+import static edu.java.bot.utility.StringCommand.TRACK;
+import static edu.java.bot.utility.StringCommand.UNTRACK;
+@Service
 public class WaitMesHandler extends Handler {
 
-    public static Command handle(Update update, DataBase dataBase) {
+    public static BaseCommand handle(Update update, DataBase dataBase) {
         return switch (update.message().text()) {
             case START:
                 yield new StartCommand(update);

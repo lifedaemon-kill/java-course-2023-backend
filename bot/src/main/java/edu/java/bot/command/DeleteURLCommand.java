@@ -1,15 +1,15 @@
-package edu.java.bot.commands;
+package edu.java.bot.command;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
-import edu.java.bot.models.DataBase;
-import edu.java.bot.models.DialogState;
+import edu.java.bot.model.DataBase;
+import edu.java.bot.model.DialogState;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import static edu.java.bot.utilities.StringCommand.UNTRACK;
+import static edu.java.bot.utility.StringCommand.UNTRACK;
 
-public class DeleteURLCommand extends Command {
+public class DeleteURLCommand extends BaseCommand {
     public DeleteURLCommand(Update update) {
         super(update);
     }

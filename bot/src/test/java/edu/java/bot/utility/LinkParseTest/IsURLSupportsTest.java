@@ -1,6 +1,6 @@
-package edu.java.bot.utilities.LinkParseTest;
+package edu.java.bot.utility.LinkParseTest;
 
-import edu.java.bot.utilities.LinkParse;
+import edu.java.bot.utility.LinkParse;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;

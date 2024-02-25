@@ -1,16 +1,16 @@
-package edu.java.bot.commands;
+package edu.java.bot.command;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
-import edu.java.bot.models.DataBase;
-import edu.java.bot.models.DialogState;
-import edu.java.bot.utilities.LinkParse;
+import edu.java.bot.model.DataBase;
+import edu.java.bot.model.DialogState;
+import edu.java.bot.utility.LinkParse;
 import java.net.URI;
 import lombok.extern.log4j.Log4j2;
-import static edu.java.bot.utilities.StringCommand.TRACK;
+import static edu.java.bot.utility.StringCommand.TRACK;
 
 @Log4j2
-public class AddURLCommand extends Command {
+public class AddURLCommand extends BaseCommand {
     public AddURLCommand(Update update) {
         super(update);
     }

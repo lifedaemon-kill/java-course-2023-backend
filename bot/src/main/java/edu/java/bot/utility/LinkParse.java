@@ -1,11 +1,13 @@
-package edu.java.bot.utilities;
+package edu.java.bot.utility;
 
-import edu.java.bot.models.SupportsDomains;
+import edu.java.bot.model.SupportsDomains;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.stereotype.Service;
 
+@Service
 @Log4j2
 public class LinkParse {
     private LinkParse() {

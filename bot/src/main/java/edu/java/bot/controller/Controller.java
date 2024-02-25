@@ -1,16 +1,16 @@
-package edu.java.bot.controllers;
+package edu.java.bot.controller;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Update;
-import edu.java.bot.commands.StartCommand;
-import edu.java.bot.handlers.WaitActHandler;
-import edu.java.bot.handlers.WaitMesHandler;
-import edu.java.bot.models.DataBase;
-import edu.java.bot.models.DialogState;
+import edu.java.bot.command.StartCommand;
+import edu.java.bot.handler.WaitActHandler;
+import edu.java.bot.handler.WaitMesHandler;
+import edu.java.bot.model.DataBase;
+import edu.java.bot.model.DialogState;
 import java.util.List;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
-import static edu.java.bot.utilities.StringCommand.START;
+import static edu.java.bot.utility.StringCommand.START;
 
 @Log4j2
 @Component

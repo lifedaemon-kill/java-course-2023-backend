@@ -1,4 +1,4 @@
-package edu.java.bot.models;
+package edu.java.bot.model;
 
 public enum DialogState {
     /* Состояния бота */
