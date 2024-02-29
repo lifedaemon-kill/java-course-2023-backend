@@ -7,7 +7,7 @@ import org.springframework.validation.annotation.Validated;
 
 @Validated
 @Configuration
-public class ClientConfiguration {
+public class ClientConfig {
     @Bean
     public GitHubClient gitHubClient() {
         return new GitHubClient();
