@@ -15,36 +15,33 @@ import static edu.java.bot.utility.Token.getFromFileTelegramToken;
 @Log4j2
 @Component
 @SpringBootApplication
-//@EnableConfigurationProperties(ApplicationConfig.class)
 public class BotApplication {
-    @Autowired
-    private static ApplicationConfig appConfig = new ApplicationConfig();
+    private final ApplicationConfig appConfig;
+    private static TelegramBot bot;
+    private static DataBase dataBase;
 
-    static {
+    @Autowired
+    public BotApplication(ApplicationConfig appConfig, TelegramBot bot, DataBase dataBase) {
+        this.appConfig = appConfig;
+        BotApplication.dataBase = dataBase;
+
         appConfig.setTelegramToken(getFromFileTelegramToken());
+        BotApplication.bot = new TelegramBot(appConfig.getTelegramToken());
     }
-
-    @Autowired
-    private static TelegramBot bot = new TelegramBot(appConfig.getTelegramToken());
-    @Autowired
-    private static DataBase dataBase = new DataBase();
 
     public static void main(String[] args) {
         SpringApplication.run(BotApplication.class, args);
 
         log.debug(bot.getToken());
         bot.setUpdatesListener(updates -> {
-            //log.info(updates);
             Controller.process(updates, bot, dataBase);
 
             return UpdatesListener.CONFIRMED_UPDATES_ALL;
         }, e -> {
             if (e.response() != null) {
-                // got bad response from telegram
                 e.response().errorCode();
                 e.response().description();
             } else {
-                // probably network error
                 log.error(e.getStackTrace());
             }
         });

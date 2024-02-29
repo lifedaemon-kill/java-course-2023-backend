@@ -1,19 +1,35 @@
 package edu.java.bot.configuration;
 
+import com.pengrad.telegrambot.TelegramBot;
+import edu.java.bot.model.DataBase;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
-import lombok.Setter;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.annotation.Validated;
 
 @Getter
 @Validated
 @Configuration
-//@ConfigurationProperties(prefix = "app", ignoreUnknownFields = false)
-//@ConfigurationPropertiesScan("application.yml")
-@Setter
 public class ApplicationConfig {
     @NotEmpty
-    //@Value("${telegram-token}")
     private String telegramToken;
+
+    @Bean
+    public DataBase dataBase() {
+        return new DataBase();
+    }
+
+    @Bean
+    public TelegramBot telegramBot(ApplicationConfig appConfig) {
+        return new TelegramBot(appConfig.getTelegramToken());
+    }
+
+    public void setTelegramToken(String telegramToken) {
+        this.telegramToken = telegramToken;
+    }
+
+    public String getTelegramToken() {
+        return telegramToken;
+    }
 }
