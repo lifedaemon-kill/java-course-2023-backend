@@ -1,14 +1,14 @@
-package edu.java.bot.commands;
+package edu.java.bot.command;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
-import edu.java.bot.models.DataBase;
-import edu.java.bot.models.DialogState;
+import edu.java.bot.model.DataBase;
+import edu.java.bot.model.DialogState;
 import java.util.ArrayList;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-public class StartCommand extends Command {
+public class StartCommand extends BaseCommand {
     public StartCommand(Update update) {
         super(update);
     }

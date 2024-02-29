@@ -1,10 +1,10 @@
-package edu.java.bot.commands;
+package edu.java.bot.command;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
-import edu.java.bot.models.DataBase;
+import edu.java.bot.model.DataBase;
 
-public class HelpCommand extends Command {
+public class HelpCommand extends BaseCommand {
     public HelpCommand(Update update) {
         super(update);
     }
