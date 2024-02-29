@@ -1,8 +1,13 @@
 package edu.java.client;
 
-import edu.java.response.GitResponse;
+import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.client.WebClient;
 
+@Component
 public class GitHubClient {
-    private GitResponse info;
+    private final WebClient webClient;
 
+    public GitHubClient(WebClient.Builder webClientBuilder) {
+        this.webClient = webClientBuilder.baseUrl("https://api.github.com").build();
+    }
 }

@@ -9,23 +9,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 public class ClientConfiguration {
     @Bean
-    public WebClient gitHubWebClient() {
-        return WebClient.builder()
-            .baseUrl("https://api.github.com")
-            .build();
-    }
-
-    @Bean
-    public WebClient stackOverflowWebClient() {
-        return WebClient.builder()
-            .baseUrl("https://api.stackexchange.com/2.3")
-            .build();
-    }
-
-    @Bean
-    public WebClient anyWebClient(String url) {
-        return WebClient.builder()
-            .baseUrl(url)
-            .build();
+    public WebClient.Builder webClientBuilder() {
+        return WebClient.builder();
     }
 }
