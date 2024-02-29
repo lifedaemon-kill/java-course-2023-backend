@@ -31,8 +31,8 @@ public class BotApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BotApplication.class, args);
+        //log.debug(bot.getToken());
 
-        log.debug(bot.getToken());
         bot.setUpdatesListener(updates -> {
             Controller.process(updates, bot, dataBase);
 
