@@ -9,6 +9,10 @@ public class GitHubClient extends Client {
         super("https://api.github.com");
     }
 
+    public GitHubClient(String baseURL) {
+        super(baseURL);
+    }
+
     @Override
     public Mono<String> getRepository(String repository) {
         return webClient.get()
