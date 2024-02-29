@@ -12,7 +12,7 @@ public class GitHubClient extends Client {
     @Override
     public Mono<String> getRepository(String repository) {
         return webClient.get()
-            .uri("/repos/{repository}", repository)
+            .uri("/repos/%s".formatted(repository))
             .retrieve()
             .bodyToMono(String.class);
     }
