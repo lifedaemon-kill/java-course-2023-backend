@@ -16,13 +16,11 @@ import static edu.java.bot.utility.Token.getFromFileTelegramToken;
 @Component
 @SpringBootApplication
 public class BotApplication {
-    private final ApplicationConfig appConfig;
     private static TelegramBot bot;
     private static DataBase dataBase;
 
     @Autowired
-    public BotApplication(ApplicationConfig appConfig, TelegramBot bot, DataBase dataBase) {
-        this.appConfig = appConfig;
+    public BotApplication(ApplicationConfig appConfig, DataBase dataBase) {
         BotApplication.dataBase = dataBase;
 
         appConfig.setTelegramToken(getFromFileTelegramToken());
