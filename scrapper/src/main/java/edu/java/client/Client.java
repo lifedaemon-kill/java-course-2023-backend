@@ -9,8 +9,10 @@ public abstract class Client {
     protected Client(String baseURL) {
         this.webClient = WebClient.builder().baseUrl(baseURL).build();
     }
-    public Client(){
+
+    public Client() {
         this("http://localhost:");
     }
+
     public abstract Mono<String> getRepository(String repository);
 }
