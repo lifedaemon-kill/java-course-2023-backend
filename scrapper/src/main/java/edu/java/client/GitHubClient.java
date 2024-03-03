@@ -1,7 +1,8 @@
 package edu.java.client;
 
+import edu.java.model.TopicState;
+import edu.java.response.GitResponse;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.Mono;
 
 @Component
 public class GitHubClient extends Client {
@@ -14,10 +15,17 @@ public class GitHubClient extends Client {
     }
 
     @Override
-    public Mono<String> getRepository(String repository) {
+    public String getRepository(String repository) {
         return webClient.get()
-            .uri("/repos/%s".formatted(repository))
+            .uri("/repos/%s/events".formatted(repository))
             .retrieve()
-            .bodyToMono(String.class);
+            .bodyToMono(String.class)
+            .block();
+    }
+
+    @Override
+    public TopicState getPayload(String json) {
+        GitResponse response = new GitResponse(json);
+        return response.getData();
     }
 }

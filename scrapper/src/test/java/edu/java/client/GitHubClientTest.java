@@ -32,7 +32,7 @@ public class GitHubClientTest {
     public void testApiClient() {
         GitHubClient client = new GitHubClient("http://localhost:" + wireMockServer.port());
 
-        String testResponse = client.getRepository("hello/world/commits").block();
+        String testResponse = client.getRepository("hello/world/commits");
 
         System.out.println(testResponse);
         Assertions.assertEquals(testResponse, "Hello from WireMock");

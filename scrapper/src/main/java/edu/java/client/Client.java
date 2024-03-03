@@ -1,7 +1,7 @@
 package edu.java.client;
 
+import edu.java.model.TopicState;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
 public abstract class Client {
     public final WebClient webClient;
@@ -14,5 +14,6 @@ public abstract class Client {
         this("http://localhost:");
     }
 
-    public abstract Mono<String> getRepository(String repository);
+    public abstract String getRepository(String repository);
+    public abstract TopicState getPayload(String json);
 }
