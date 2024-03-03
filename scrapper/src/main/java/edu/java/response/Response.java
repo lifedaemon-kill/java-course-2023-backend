@@ -9,6 +9,7 @@ public abstract class Response {
     protected TopicState data;
 
     abstract int getAnswersCount(String json) throws WrongEventsCountRunTimeException;
+
     public Response() {
     }
 }

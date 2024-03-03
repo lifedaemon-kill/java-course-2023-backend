@@ -15,5 +15,6 @@ public abstract class Client {
     }
 
     public abstract String getRepository(String repository);
+
     public abstract TopicState getPayload(String json);
 }
