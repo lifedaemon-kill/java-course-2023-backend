@@ -9,7 +9,11 @@ import org.springframework.stereotype.Component;
 @Component
 @EnableScheduling
 public class LinkUpdaterScheduler {
-    @Scheduled(fixedDelayString = "#{scrapperConfig.getScheduler().getInterval().toMillis()}")
+
+    public LinkUpdaterScheduler() {
+    }
+
+    @Scheduled(fixedDelayString = "${app.scheduler.interval}")
     void update() {
         log.info("Запуск обновления состояния ссылок");
     }
