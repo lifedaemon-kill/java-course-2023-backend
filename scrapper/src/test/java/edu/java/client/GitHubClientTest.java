@@ -17,7 +17,7 @@ public class GitHubClientTest {
         wireMockServer = new WireMockServer();
         wireMockServer.start();
         WireMock.configureFor("localhost", wireMockServer.port());
-        wireMockServer.stubFor(WireMock.get(urlEqualTo("/repos/hello/world/commits"))
+        wireMockServer.stubFor(WireMock.get(urlEqualTo("/repos/hello/world/commits/events"))
             .willReturn(aResponse()
                 .withStatus(200)
                 .withBody("Hello from WireMock")));
