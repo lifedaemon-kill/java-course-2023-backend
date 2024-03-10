@@ -2,8 +2,8 @@ package edu.java.bot.command;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
-import edu.java.bot.model.DataBase;
-import edu.java.bot.model.DialogState;
+import database.DataBase;
+import database.DialogState;
 import edu.java.bot.utility.LinkParse;
 import java.net.URI;
 import lombok.extern.log4j.Log4j2;
@@ -28,7 +28,7 @@ public class AddURLCommand extends BaseCommand {
             try {
                 URI url = new URI(text);
                 //Добавление ссылки в базу
-                dataBase.getUrlList().get(id).add(url);
+                dataBase.getListLinks().get(id).add(url);
             } catch (Exception e) {
                 log.error("Непредвиденная ошибка в Add process");
                 log.error(e.getMessage());
@@ -47,7 +47,7 @@ public class AddURLCommand extends BaseCommand {
         Long id = update.message().chat().id();
         DialogState state = dataBase.getDialogState().get(id);
 
-        if (!dataBase.getDialogState().containsKey(id) || !dataBase.getUrlList().containsKey(id)) {
+        if (!dataBase.getDialogState().containsKey(id) || !dataBase.getListLinks().containsKey(id)) {
             return new SendMessage(id, "Пользователь не зарегистрирован, используйте /start");
         }
 

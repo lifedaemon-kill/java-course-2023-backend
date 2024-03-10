@@ -1,4 +1,4 @@
-package edu.java.bot.model;
+package edu.java.bot.utility;
 
 import java.util.HashSet;
 import java.util.Set;

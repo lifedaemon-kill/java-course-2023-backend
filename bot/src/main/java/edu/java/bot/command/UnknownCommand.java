@@ -2,7 +2,8 @@ package edu.java.bot.command;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
-import edu.java.bot.model.DataBase;
+import database.DataBase;
+import database.DialogState;
 
 public class UnknownCommand extends BaseCommand {
     public UnknownCommand(Update update) {

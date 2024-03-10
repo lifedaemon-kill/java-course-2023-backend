@@ -1,9 +1,10 @@
 package edu.java.bot.configuration;
 
-import com.pengrad.telegrambot.TelegramBot;
-import edu.java.bot.model.DataBase;
+import database.DataBase;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.annotation.Validated;
@@ -12,24 +13,12 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 @Configuration
 public class ApplicationConfig {
-    @NotEmpty
+    @NotEmpty @NotNull
+    @Value("${app.telegram-token}")
     private String telegramToken;
 
     @Bean
-    public DataBase dataBase() {
+    public DataBase getDataBase() {
         return new DataBase();
-    }
-
-    @Bean
-    public TelegramBot telegramBot(ApplicationConfig appConfig) {
-        return new TelegramBot(appConfig.getTelegramToken());
-    }
-
-    public void setTelegramToken(String telegramToken) {
-        this.telegramToken = telegramToken;
-    }
-
-    public String getTelegramToken() {
-        return telegramToken;
     }
 }

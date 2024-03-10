@@ -1,0 +1,62 @@
+openapi: 3.0.1
+info:
+  title: Bot API
+  version: 1.0.0
+  contact:
+    name: Ruslan
+    url: https://github.com/lifedaemon-kill
+
+paths:
+  /updates:
+    post:
+      summary: Send update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LinkUpdate'
+        required: true
+      responses:
+        '200':
+          description: Update processed
+        '400':
+          description: Uncorrected request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+
+components:
+  schemas:
+    ApiErrorResponse:
+      type: object
+      properties:
+        description:
+          type: string
+        code:
+          type: string
+        exceptionName:
+          type: string
+        exceptionMessage:
+          type: string
+        stacktrace:
+          type: array
+          items:
+            type: string
+
+    LinkUpdate:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        url:
+          type: string
+          format: uri
+        description:
+          type: string
+        tgChatIds:
+          type: array
+          items:
+            type: integer
+            format: int64

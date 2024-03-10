@@ -2,8 +2,8 @@ package edu.java.bot.command;
 
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
-import edu.java.bot.model.DataBase;
-import edu.java.bot.model.DialogState;
+import database.DataBase;
+import database.DialogState;
 import java.util.ArrayList;
 import lombok.extern.log4j.Log4j2;
 
@@ -22,7 +22,7 @@ public class StartCommand extends BaseCommand {
     @Override
     public SendMessage process(DataBase dataBase) {
         dataBase.getDialogState().put(id, DialogState.WaitMessage);
-        dataBase.getUrlList().put(id, new ArrayList<>());
+        dataBase.getListLinks().put(id, new ArrayList<>());
 
         log.info("Зарегистрирован пользователь %s".formatted(id));
         return new SendMessage(id, this.message);

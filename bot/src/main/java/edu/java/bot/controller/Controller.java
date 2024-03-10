@@ -5,8 +5,8 @@ import com.pengrad.telegrambot.model.Update;
 import edu.java.bot.command.StartCommand;
 import edu.java.bot.handler.WaitActHandler;
 import edu.java.bot.handler.WaitMesHandler;
-import edu.java.bot.model.DataBase;
-import edu.java.bot.model.DialogState;
+import database.DataBase;
+import database.DialogState;
 import java.util.List;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
@@ -34,7 +34,7 @@ public class Controller {
             //Первый запуск
             if (text.equals(START)
                 || !dataBase.getDialogState().containsKey(id)
-                || !dataBase.getUrlList().containsKey(id)) {
+                || !dataBase.getListLinks().containsKey(id)) {
                 var command = new StartCommand(update);
                 bot.execute(command.process(dataBase));
                 continue;

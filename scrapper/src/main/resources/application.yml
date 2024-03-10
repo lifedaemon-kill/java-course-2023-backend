@@ -1,8 +1,8 @@
 app:
   scheduler:
     enable: true
-    interval: 1500
-    force-check-delay: 1500
+    interval: 12000
+    force-check-delay: 12000
 
 spring:
   application:
@@ -10,6 +10,11 @@ spring:
 
 server:
   port: 8080
+  baseURL: http://localhost:${server.port}}
 
 logging:
   config: classpath:log4j2-plain.xml
+
+springdoc:
+  api-docs:
+    path: /swagger-ui
