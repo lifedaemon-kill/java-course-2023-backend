@@ -12,38 +12,42 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class ExceptionApiHandler {
+    private final String alreadyReported = "208";
+
     @ExceptionHandler(AlreadyRegisteredException.class)
-    public ResponseEntity<ApiErrorResponse> AlreadyRegisteredException(AlreadyRegisteredException exception) {
+    public ResponseEntity<ApiErrorResponse> alreadyRegisteredException(AlreadyRegisteredException exception) {
         return ResponseEntity
             .status(HttpStatus.ALREADY_REPORTED)
             .body(new ApiErrorResponse(
-                "User already registered",
-                "208",
+                "User trying several times to register",
+                 alreadyReported,
                 "AlreadyRegisteredException",
                 "User already registered",
                 exception.getStackTrace()
             ));
     }
+
     @ExceptionHandler(LinkAlreadyAddedException.class)
     public ResponseEntity<ApiErrorResponse> linkAlreadyAddedException(LinkAlreadyAddedException exception) {
         return ResponseEntity
             .status(HttpStatus.ALREADY_REPORTED)
             .body(new ApiErrorResponse(
                 "Link already in array",
-                "208",
+                 alreadyReported,
                 "LinkAlreadyAddedException",
                 "This link is already in array",
                 exception.getStackTrace()
             ));
     }
+
     @ExceptionHandler(UncorrectedParametersException.class)
     public ResponseEntity<ApiErrorResponse> uncorrectedParameters(UncorrectedParametersException exception) {
         return ResponseEntity
             .status(HttpStatus.BAD_REQUEST)
             .body(new ApiErrorResponse(
-               "Some of the parameters are not correct",
-               "400",
-               "UncorrectedParametersException",
+                "Parameters are not correct",
+                "400",
+                "UncorrectedParametersException",
                 "Some of the parameters are not correct",
                 exception.getStackTrace()
             ));
@@ -54,7 +58,7 @@ public class ExceptionApiHandler {
         return ResponseEntity
             .status(HttpStatus.NOT_FOUND)
             .body(new ApiErrorResponse(
-                "Chat not found",
+                "Chat not found in db",
                 "404",
                 "NotFoundException",
                 "Chat not found",
