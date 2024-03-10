@@ -1,11 +1,10 @@
 package edu.java.bot.handler;
 
 import com.pengrad.telegrambot.model.Update;
+import database.DataBase;
 import edu.java.bot.command.AddURLCommand;
 import edu.java.bot.command.BaseCommand;
 import edu.java.bot.command.DeleteURLCommand;
-import database.DataBase;
-import database.DialogState;
 import org.springframework.stereotype.Service;
 
 @Service
