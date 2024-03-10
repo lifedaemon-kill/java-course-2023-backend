@@ -133,7 +133,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.example</groupId>
+            <groupId>edu.java</groupId>
             <artifactId>models</artifactId>
             <version>0.1</version>
             <scope>compile</scope>
