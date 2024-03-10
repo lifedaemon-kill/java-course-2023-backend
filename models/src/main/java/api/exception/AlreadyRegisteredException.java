@@ -1,4 +1,4 @@
-package apiException;
+package api.exception;
 
 public class AlreadyRegisteredException extends RuntimeException {
 }

@@ -1,6 +1,6 @@
-package apiErrorResponse;
+package api.errorResponse;
 
-public record ApiErrorResponse (
+public record ApiErrorResponse(
     String description,
     String code,
     String exceptionName,

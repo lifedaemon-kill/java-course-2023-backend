@@ -1,10 +1,10 @@
 package edu.java.api;
 
-import apiErrorResponse.ApiErrorResponse;
-import apiException.AlreadyRegisteredException;
-import apiException.LinkAlreadyAddedException;
-import apiException.NotFoundException;
-import apiException.UncorrectedParametersException;
+import api.errorResponse.ApiErrorResponse;
+import api.exception.AlreadyRegisteredException;
+import api.exception.LinkAlreadyAddedException;
+import api.exception.NotFoundException;
+import api.exception.UncorrectedParametersException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
