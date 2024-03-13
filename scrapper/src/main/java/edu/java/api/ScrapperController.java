@@ -1,10 +1,12 @@
 package edu.java.api;
 
-import dto.response.LinkResponse;
-import dto.response.ListLinksResponse;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
+import api.exception.AlreadyRegisteredException;
+import api.exception.NotFoundException;
+import api.exception.UncorrectedParametersException;
+import dto.request.AddLinkRequest;
+import dto.request.ChangeDialogStateRequest;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jdk.jfr.Description;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,48 +14,57 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ScrapperController {
-    @Description("Register chat")
+    private final ScrapperService service;
+
+    public ScrapperController(ScrapperService service) {
+        this.service = service;
+    }
+
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Chat was registered successfully"),
+        @ApiResponse(responseCode = "208", description = "Chat already registered"),
+        @ApiResponse(responseCode = "400", description = "Uncorrected request parameters")
+    })
     @PostMapping("/tg-chat/{id}")
-    public HttpStatus registerChat(@PathVariable String id) {
-        //if db has no this id return 200(or 201)
-        //if db has this id return 401
-        //if wrong id return 400
-        return HttpStatus.OK;
+    public ResponseEntity<Object> registerChat(@PathVariable Long id)
+        throws AlreadyRegisteredException, UncorrectedParametersException {
+        return service.registerChat(id);
     }
 
-    @Description("Delete chat")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Chat was deleted successfully"),
+        @ApiResponse(responseCode = "400", description = "Uncorrected request parameters"),
+        @ApiResponse(responseCode = "404", description = "Chat doesn't exist")
+    })
     @DeleteMapping("/tg-chat/{id}")
-    public HttpStatus deleteChat(@PathVariable String id) {
-        //if db has this id return 200
-        //if wrong id return 400
-        //return 404 if chat doesnt exist
-        return HttpStatus.OK;
+    public ResponseEntity<Object> deleteChat(@PathVariable Long id) throws NotFoundException {
+        return service.deleteChat(id);
     }
 
-    @Description("Get all tracked links")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Links have been successfully received"),
+        @ApiResponse(responseCode = "400", description = "Invalid request parameters"),
+        @ApiResponse(responseCode = "404", description = "The chat is not registered yet")
+    })
     @GetMapping("/links")
-    public ResponseEntity<ListLinksResponse> getTrackedLinks(@RequestHeader("Tg-Chat-Id") Long tgChatId) {
-        //from db get links for this id
-        //return 400 if wrong
-        //return 404 if chat doesnt exist
-        List<LinkResponse> links = new ArrayList<>();
-        links.add(new LinkResponse(0, URI.create("https://github.com/lifedaemon-kill/java-course-2023-backend")));
-
-        return ResponseEntity.ok(new ListLinksResponse(links, links.size()));
+    public ResponseEntity<Object> getLinks(@RequestHeader("Tg-Chat-id") Long chatId) throws NotFoundException {
+        return service.getLinks(chatId);
     }
 
     @Description("Add link tracking")
     @PostMapping("/links")
-    public HttpStatus addLinkTracking(@RequestHeader("Tg-Chat-Id") Long tgChatId) {
-        //return 200
-        //return 400 if wrong
-        //return 404 if chat doesnt exist
-        return HttpStatus.OK;
+    public ResponseEntity<Object> addLinkTracking(
+        @RequestHeader("Tg-Chat-Id") Long tgChatId,
+        @RequestBody AddLinkRequest addLinkRequest
+    ) {
+
+        return service.addLinkTracking(tgChatId, addLinkRequest);
     }
 
     @Description("Delete link tracking")
@@ -63,5 +74,18 @@ public class ScrapperController {
         //return 400 if wrong
         //return 404 if chat doesnt exist
         return HttpStatus.OK;
+    }
+
+    @GetMapping("/state")
+    public ResponseEntity<Object> getDialogState(@RequestHeader("Tg-Chat-Id") Long tgChatId) {
+        return service.getDialogState(tgChatId);
+    }
+
+    @PostMapping("/state")
+    public ResponseEntity<Object> changeDialogState(
+        @RequestHeader("Tg-Chat-Id") Long tgChatId,
+        @RequestBody ChangeDialogStateRequest dialogStateRequest
+    ) {
+        return service.changeDialogState(tgChatId, dialogStateRequest);
     }
 }
