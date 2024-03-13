@@ -2,13 +2,11 @@ package edu.java.api;
 
 import api.exception.AlreadyRegisteredException;
 import api.exception.NotFoundException;
-import api.exception.UncorrectedParametersException;
 import dto.request.AddLinkRequest;
 import dto.request.ChangeDialogStateRequest;
+import dto.request.RemoveLinkRequest;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import jdk.jfr.Description;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +31,7 @@ public class ScrapperController {
     })
     @PostMapping("/tg-chat/{id}")
     public ResponseEntity<Object> registerChat(@PathVariable Long id)
-        throws AlreadyRegisteredException, UncorrectedParametersException {
+        throws AlreadyRegisteredException {
         return service.registerChat(id);
     }
 
@@ -57,30 +55,47 @@ public class ScrapperController {
         return service.getLinks(chatId);
     }
 
-    @Description("Add link tracking")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Link successfully added"),
+        @ApiResponse(responseCode = "400", description = "Invalid request parameters"),
+        @ApiResponse(responseCode = "404", description = "The chat is not registered yet")
+    })
     @PostMapping("/links")
     public ResponseEntity<Object> addLinkTracking(
         @RequestHeader("Tg-Chat-Id") Long tgChatId,
         @RequestBody AddLinkRequest addLinkRequest
     ) {
-
         return service.addLinkTracking(tgChatId, addLinkRequest);
     }
 
-    @Description("Delete link tracking")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Link successfully deleted"),
+        @ApiResponse(responseCode = "400", description = "Invalid request parameters"),
+        @ApiResponse(responseCode = "404", description = "The chat is not registered yet")
+    })
     @DeleteMapping("/links")
-    public HttpStatus deleteLinkTracking(@RequestHeader("Tg-Chat-Id") Long tgChatId) {
-        //return 200
-        //return 400 if wrong
-        //return 404 if chat doesnt exist
-        return HttpStatus.OK;
+    public ResponseEntity<Object> deleteLinkTracking(
+        @RequestHeader("Tg-Chat-Id") Long tgChatId,
+        @RequestBody RemoveLinkRequest request
+    ) {
+        return service.deleteLinkTracking(tgChatId, request);
     }
 
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Dialog state successfully responded"),
+        @ApiResponse(responseCode = "400", description = "Invalid request parameters"),
+        @ApiResponse(responseCode = "404", description = "The chat is not registered yet")
+    })
     @GetMapping("/state")
     public ResponseEntity<Object> getDialogState(@RequestHeader("Tg-Chat-Id") Long tgChatId) {
         return service.getDialogState(tgChatId);
     }
 
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Dialog state successfully changed"),
+        @ApiResponse(responseCode = "400", description = "Invalid request parameters"),
+        @ApiResponse(responseCode = "404", description = "The chat is not registered yet")
+    })
     @PostMapping("/state")
     public ResponseEntity<Object> changeDialogState(
         @RequestHeader("Tg-Chat-Id") Long tgChatId,

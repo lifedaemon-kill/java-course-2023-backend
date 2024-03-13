@@ -2,9 +2,9 @@ package edu.java.api;
 
 import dto.request.AddLinkRequest;
 import dto.request.ChangeDialogStateRequest;
+import dto.request.RemoveLinkRequest;
 import dto.response.LinkResponse;
 import dto.response.ListLinksResponse;
-import edu.java.DataBaseController;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +85,10 @@ public class ScrapperService {
         }
         return ResponseEntity.status(HttpStatus.OK).build();
     }
-
+   public ResponseEntity<Object> deleteLinkTracking(Long id, RemoveLinkRequest request){
+        db.deleteIdFromLink(id, request);
+        return ResponseEntity.status(HttpStatus.OK).build();
+   }
     public ResponseEntity<Object> getDialogState(Long id) {
         if (db.getDialogState(id) == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found");

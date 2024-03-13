@@ -1,7 +1,9 @@
-package edu.java;
+package edu.java.api;
 
+import api.exception.NotFoundException;
 import database.DataBase;
 import database.DialogState;
+import dto.request.RemoveLinkRequest;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
@@ -33,9 +35,17 @@ public class DataBaseController {
 
         for (Map.Entry<URI, List<Long>> entry : linkUsers.entrySet()) {
             entry.getValue().removeIf(value -> value.equals(id));
-            if(entry.getValue().isEmpty()){
+            if (entry.getValue().isEmpty()) {
                 linkUsers.remove(entry.getKey());
             }
+        }
+    }
+
+    public void deleteIdFromLink(Long id, RemoveLinkRequest request) {
+        if (linkUsers.get(request.link()) == null) {
+            throw new NotFoundException();
+        } else {
+            linkUsers.get(request.link()).remove(id);
         }
     }
 }
