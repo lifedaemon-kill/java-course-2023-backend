@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 public class DataBase {
     private HashMap<Long, DialogState> dialogState = new HashMap<>();
-    private HashMap<Long, List<URI>> listLinks = new HashMap<>();
+    private HashMap<URI, List<Long>> linkUsers = new HashMap<>();
 
     public DataBase() {
     }

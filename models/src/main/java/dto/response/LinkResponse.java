@@ -3,7 +3,7 @@ package dto.response;
 import java.net.URI;
 
 public record LinkResponse(
-    int id,
+    Long id,
     URI url
 ) {
 }

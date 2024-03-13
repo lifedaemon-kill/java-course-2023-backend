@@ -5,9 +5,9 @@ import com.pengrad.telegrambot.request.SendMessage;
 import database.DataBase;
 
 public abstract class BaseCommand {
-    protected Update update;
-    protected Long id;
-    protected String text;
+    protected final Update update;
+    protected final Long id;
+    protected final String text;
 
     public abstract SendMessage process(DataBase dataBase);
 
