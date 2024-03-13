@@ -17,8 +17,5 @@ public class ApplicationConfig {
     @Value("${app.telegram-token}")
     private String telegramToken;
 
-    @Bean
-    public DataBase getDataBase() {
-        return new DataBase();
-    }
+
 }
