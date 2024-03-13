@@ -2,15 +2,10 @@ package edu.java.bot.controller;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Update;
-import edu.java.bot.command.StartCommand;
-import edu.java.bot.handler.WaitActHandler;
-import edu.java.bot.handler.WaitMesHandler;
 import database.DataBase;
-import database.DialogState;
 import java.util.List;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
-import static edu.java.bot.utility.StringCommand.START;
 
 @Log4j2
 @Component
@@ -20,6 +15,8 @@ public class Controller {
 
     public static void process(List<Update> updateList, TelegramBot bot, DataBase dataBase) {
         for (Update update : updateList) {
+            continue;
+            /*
             if (update.message() == null
                 || update.message().text() == null
                 || update.message().text().isEmpty()) {
@@ -49,6 +46,8 @@ public class Controller {
                 var command = WaitActHandler.handle(update, dataBase);
                 bot.execute(command.process(dataBase));
             }
+
+             */
         }
     }
 }

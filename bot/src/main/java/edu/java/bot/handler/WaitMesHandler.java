@@ -1,6 +1,8 @@
 package edu.java.bot.handler;
 
 import com.pengrad.telegrambot.model.Update;
+import database.DataBase;
+import database.DialogState;
 import edu.java.bot.command.AddURLCommand;
 import edu.java.bot.command.BaseCommand;
 import edu.java.bot.command.DeleteURLCommand;
@@ -8,8 +10,6 @@ import edu.java.bot.command.HelpCommand;
 import edu.java.bot.command.ListCommand;
 import edu.java.bot.command.StartCommand;
 import edu.java.bot.command.UnknownCommand;
-import database.DataBase;
-import database.DialogState;
 import org.springframework.stereotype.Service;
 import static edu.java.bot.utility.StringCommand.HELP;
 import static edu.java.bot.utility.StringCommand.LIST;
