@@ -11,13 +11,13 @@ import org.springframework.context.annotation.Configuration;
 
 @Getter
 @Configuration
-public class ScrapperConfig {
+public class ScrapperApiConfig {
     @NotEmpty @NotNull
-    @Value("server.baseURL")
+    @Value("http-client.baseURL")
     public String baseURL;
 
     @Bean
-    public ScrapperHttpClient getScrapperHttpClient(ScrapperConfig config) {
+    public ScrapperHttpClient getScrapperHttpClient(ScrapperApiConfig config) {
         return new ScrapperHttpClient(config);
     }
     @Bean

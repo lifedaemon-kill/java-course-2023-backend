@@ -5,6 +5,9 @@ import api.exception.NotFoundException;
 import dto.request.AddLinkRequest;
 import dto.request.ChangeDialogStateRequest;
 import dto.request.RemoveLinkRequest;
+import dto.response.DialogStateResponse;
+import dto.response.LinkResponse;
+import dto.response.ListLinksResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +20,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class ScrapperController {
-    private final ScrapperService service;
+public class ScrapperApiController {
+    private final ScrapperApiService service;
 
-    public ScrapperController(ScrapperService service) {
+    public ScrapperApiController(ScrapperApiService service) {
         this.service = service;
     }
 
@@ -51,7 +54,7 @@ public class ScrapperController {
         @ApiResponse(responseCode = "404", description = "The chat is not registered yet")
     })
     @GetMapping("/links")
-    public ResponseEntity<Object> getLinks(@RequestHeader("Tg-Chat-id") Long chatId) throws NotFoundException {
+    public ListLinksResponse getLinks(@RequestHeader("Tg-Chat-Id") Long chatId) throws NotFoundException {
         return service.getLinks(chatId);
     }
 
@@ -61,7 +64,7 @@ public class ScrapperController {
         @ApiResponse(responseCode = "404", description = "The chat is not registered yet")
     })
     @PostMapping("/links")
-    public ResponseEntity<Object> addLinkTracking(
+    public LinkResponse addLinkTracking(
         @RequestHeader("Tg-Chat-Id") Long tgChatId,
         @RequestBody AddLinkRequest addLinkRequest
     ) {
@@ -74,7 +77,7 @@ public class ScrapperController {
         @ApiResponse(responseCode = "404", description = "The chat is not registered yet")
     })
     @DeleteMapping("/links")
-    public ResponseEntity<Object> deleteLinkTracking(
+    public LinkResponse deleteLinkTracking(
         @RequestHeader("Tg-Chat-Id") Long tgChatId,
         @RequestBody RemoveLinkRequest request
     ) {
@@ -87,7 +90,7 @@ public class ScrapperController {
         @ApiResponse(responseCode = "404", description = "The chat is not registered yet")
     })
     @GetMapping("/state")
-    public ResponseEntity<Object> getDialogState(@RequestHeader("Tg-Chat-Id") Long tgChatId) {
+    public DialogStateResponse getDialogState(@RequestHeader("Tg-Chat-Id") Long tgChatId) {
         return service.getDialogState(tgChatId);
     }
 
@@ -97,7 +100,7 @@ public class ScrapperController {
         @ApiResponse(responseCode = "404", description = "The chat is not registered yet")
     })
     @PostMapping("/state")
-    public ResponseEntity<Object> changeDialogState(
+    public DialogStateResponse changeDialogState(
         @RequestHeader("Tg-Chat-Id") Long tgChatId,
         @RequestBody ChangeDialogStateRequest dialogStateRequest
     ) {
