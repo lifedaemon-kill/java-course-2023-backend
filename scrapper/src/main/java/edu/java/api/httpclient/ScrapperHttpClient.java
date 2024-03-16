@@ -1,6 +1,6 @@
 package edu.java.api.httpclient;
 
-import edu.java.configuration.ScrapperConfig;
+import edu.java.configuration.ScrapperApiConfig;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -8,8 +8,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class ScrapperHttpClient {
     public final WebClient webClient;
 
-    public ScrapperHttpClient(ScrapperConfig config) {
+    public ScrapperHttpClient(ScrapperApiConfig config) {
         this.webClient = WebClient.create(config.baseURL);
     }
-
 }
