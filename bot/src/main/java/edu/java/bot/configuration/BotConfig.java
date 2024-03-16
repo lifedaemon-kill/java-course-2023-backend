@@ -35,7 +35,6 @@ public class BotConfig {
     @Bean
     public TelegramBot telegramBot(
         ApplicationConfig appConfig,
-        BotHttpClient httpClient,
         UpdatesListener updatesListener,
         ExceptionHandler exceptionHandler
     ) {
