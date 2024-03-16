@@ -32,6 +32,13 @@ public class BotClientService {
             .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
             .header("Tg-Chat-Id", id.toString())
             .retrieve()
-            .bodyToMono(DialogStateResponse.class);
+            .bodyToMono(DialogStateResponse.class)
+            .onErrorReturn(null)
+            .doOnError(error -> {
+                log.error(error.toString());
+            })
+            .doOnNext(response -> {
+                log.debug(String.format("dialog state response 200, user: %s", response.id().toString()));
+            });
     }
 }
