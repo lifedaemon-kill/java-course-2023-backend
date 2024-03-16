@@ -10,7 +10,10 @@ spring:
 
 server:
   port: 8080
-  baseURL: http://localhost:${server.port}}
+
+http-client:
+  port: 8090
+  baseURL: http://localhost:${http-client.port}}
 
 logging:
   config: classpath:log4j2-plain.xml
