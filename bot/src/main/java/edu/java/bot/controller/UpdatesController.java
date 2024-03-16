@@ -1,4 +1,4 @@
-//package edu.java.bot.controller;
+package edu.java.bot.controller;
 //
 //import com.pengrad.telegrambot.model.Update;
 //import java.util.List;
@@ -15,7 +15,7 @@
 //
 //@Log4j2
 //@Controller
-//public class UpdatesController {
+public class UpdatesController {
 //    private final static ExecutorService executor = Executors.newFixedThreadPool(10);
 //    static BotClientService httpService;
 //    public UpdatesController(BotClientService httpService) {
@@ -60,4 +60,4 @@
 //             */
 //        }
 //    }
-//}
+}

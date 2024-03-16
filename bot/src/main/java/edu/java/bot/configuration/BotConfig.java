@@ -15,7 +15,7 @@ public class BotConfig {
     @Bean
     public UpdatesListener updatesListener() {
         return updates -> {
-            UpdatesController.process(updates);
+            //UpdatesController.process(updates);
             return UpdatesListener.CONFIRMED_UPDATES_ALL;
         };
     }
