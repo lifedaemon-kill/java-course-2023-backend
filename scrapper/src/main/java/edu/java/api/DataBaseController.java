@@ -1,13 +1,15 @@
 package edu.java.api;
 
+import api.exception.LinkAlreadyAddedException;
 import api.exception.NotFoundException;
 import database.DataBase;
 import database.DialogState;
-import dto.request.RemoveLinkRequest;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import dto.response.LinkResponse;
 import lombok.Getter;
 import org.springframework.stereotype.Controller;
 
@@ -22,14 +24,44 @@ public class DataBaseController {
         this.linkUsers = dataBase.getLinkUsers();
     }
 
-    public void addDialogState(Long id) {
-        dialogState.put(id, DialogState.WaitMessage);
+    //Region DialogState
+    public void createUserDialogState(Long id) {
+        putDialogState(id, DialogState.WaitMessage);
     }
 
     public DialogState getDialogState(Long id) {
         return dialogState.get(id);
     }
 
+    public void putDialogState(Long id, DialogState state) {
+        dialogState.put(id, state);
+    }
+    //End DialogState
+
+    //Region Links
+    public void addIdToLink(Long id, URI link) {
+        if(linkUsers.containsKey(link)) {
+            if(linkUsers.get(link).contains(id)){
+                throw new LinkAlreadyAddedException();
+            }
+            linkUsers.get(link).add(id);
+        }
+        linkUsers.put(link, new ArrayList<>(List.of(id)));
+    }
+
+    public void deleteIdFromLink(Long id, URI link) {
+        if (linkUsers.get(link) == null) {
+            throw new NotFoundException();
+        }
+        linkUsers.get(link)
+            .remove(id);
+    }
+    public  List<LinkResponse> getLinkList(Long id){
+    return null;
+    }
+    //End Links
+
+    //Region Chat
     public void deleteChat(Long id) {
         dialogState.remove(id);
 
@@ -40,12 +72,5 @@ public class DataBaseController {
             }
         }
     }
-
-    public void deleteIdFromLink(Long id, RemoveLinkRequest request) {
-        if (linkUsers.get(request.link()) == null) {
-            throw new NotFoundException();
-        } else {
-            linkUsers.get(request.link()).remove(id);
-        }
-    }
+    //End Chat
 }
