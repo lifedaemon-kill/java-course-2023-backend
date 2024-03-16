@@ -30,8 +30,8 @@ public class LinkParse {
         try {
             url = new URI(link);
             String urlDomain = url.getHost();
-            log.debug("Ссылка " + urlDomain + " " + SupportsDomains.STRING_SET.contains(urlDomain));
-            return SupportsDomains.STRING_SET.contains(urlDomain);
+            log.debug("Ссылка " + urlDomain + " " + SupportedDomainsArchive.STRING_SET.contains(urlDomain));
+            return SupportedDomainsArchive.STRING_SET.contains(urlDomain);
         } catch (Exception ignore) {
             return false;
         }
