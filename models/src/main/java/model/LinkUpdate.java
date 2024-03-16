@@ -1,12 +1,12 @@
 package model;
 
 import java.net.URI;
-import java.util.ArrayList;
+import java.util.List;
 
 public record LinkUpdate(
-    int id,
+    Long id,
     URI url,
     String description,
-    ArrayList<Integer> tgChatIds
+    List<Long> tgChatIds
 ) {
 }

@@ -16,7 +16,9 @@ public class BotServerService {
     }
 
     public ResponseEntity<Object> linkContentUpdate(LinkUpdate linkUpdate) {
-        bot.execute(new SendMessage(linkUpdate.id(), "Новое сообщение по ссылке\n"));
+        for(Long id: linkUpdate.tgChatIds()){
+            bot.execute(new SendMessage(id, String.format("Новый ответ по ссылке:\n%s", linkUpdate.url().toString())));
+        }
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
