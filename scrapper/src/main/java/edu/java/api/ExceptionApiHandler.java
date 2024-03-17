@@ -20,7 +20,7 @@ public class ExceptionApiHandler {
             .status(HttpStatus.ALREADY_REPORTED)
             .body(new ApiErrorResponse(
                 "User trying several times to register",
-                 alreadyReported,
+                alreadyReported,
                 "AlreadyRegisteredException",
                 "User already registered",
                 exception.getStackTrace()
@@ -33,7 +33,7 @@ public class ExceptionApiHandler {
             .status(HttpStatus.ALREADY_REPORTED)
             .body(new ApiErrorResponse(
                 "Link already in array",
-                 alreadyReported,
+                alreadyReported,
                 "LinkAlreadyAddedException",
                 "This link is already in array",
                 exception.getStackTrace()
@@ -65,5 +65,4 @@ public class ExceptionApiHandler {
                 exception.getStackTrace()
             ));
     }
-
 }

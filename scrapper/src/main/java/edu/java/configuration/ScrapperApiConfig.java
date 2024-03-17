@@ -15,13 +15,13 @@ public class ScrapperApiConfig {
     @NotEmpty @NotNull
     @Value("http-client.baseURL")
     public String baseURL;
-
     @Bean
-    public ScrapperHttpClient getScrapperHttpClient(ScrapperApiConfig config) {
+    public ScrapperHttpClient scrapperHttpClient(ScrapperApiConfig config) {
         return new ScrapperHttpClient(config);
     }
+
     @Bean
-    public DataBase getDataBase() {
+    public DataBase dataBase() {
         return new DataBase();
     }
 }

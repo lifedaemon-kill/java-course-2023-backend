@@ -1,7 +1,7 @@
-package edu.java.bot.handler;
+package edu.java.bot.command;
 
 import com.pengrad.telegrambot.model.Update;
 
-public interface Handler {
+public interface Command {
     void execute(Update update);
 }

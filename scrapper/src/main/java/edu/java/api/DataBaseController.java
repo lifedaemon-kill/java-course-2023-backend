@@ -4,12 +4,12 @@ import api.exception.LinkAlreadyAddedException;
 import api.exception.NotFoundException;
 import database.DataBase;
 import database.DialogState;
+import dto.response.LinkResponse;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import dto.response.LinkResponse;
 import lombok.Getter;
 import org.springframework.stereotype.Controller;
 
@@ -40,8 +40,8 @@ public class DataBaseController {
 
     //Region Links
     public void addIdToLink(Long id, URI link) {
-        if(linkUsers.containsKey(link)) {
-            if(linkUsers.get(link).contains(id)){
+        if (linkUsers.containsKey(link)) {
+            if (linkUsers.get(link).contains(id)) {
                 throw new LinkAlreadyAddedException();
             }
             linkUsers.get(link).add(id);
@@ -56,8 +56,9 @@ public class DataBaseController {
         linkUsers.get(link)
             .remove(id);
     }
-    public  List<LinkResponse> getLinkList(Long id){
-    return null;
+
+    public List<LinkResponse> getLinkList(Long id) {
+        return null;
     }
     //End Links
 

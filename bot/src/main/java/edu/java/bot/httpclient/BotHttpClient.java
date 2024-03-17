@@ -1,4 +1,4 @@
-package edu.java.bot.api.httpclient;
+package edu.java.bot.httpclient;
 
 import edu.java.bot.configuration.BotHttpClientConfig;
 import org.springframework.web.reactive.function.client.WebClient;

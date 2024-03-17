@@ -1,5 +1,6 @@
 package edu.java.configuration;
 
+import edu.java.api.httpclient.ScrapperHttpClient;
 import edu.java.client.GitHubClient;
 import edu.java.client.StackOverFlowClient;
 import org.springframework.context.annotation.Bean;
@@ -9,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 @Configuration
 public class ClientConfig {
+
     @Bean
     public GitHubClient gitHubClient() {
         return new GitHubClient();
