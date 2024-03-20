@@ -3,6 +3,7 @@ package edu.java.bot.api;
 import database.DialogState;
 import dto.request.ChangeDialogStateRequest;
 import dto.response.DialogStateResponse;
+import edu.java.bot.configuration.BotHttpClientConfig;
 import edu.java.bot.httpclient.BotHttpClient;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpHeaders;
@@ -15,8 +16,8 @@ import org.springframework.stereotype.Service;
 public class BotClientService {
     private final BotHttpClient client;
 
-    public BotClientService(BotHttpClient client) {
-        this.client = client;
+    public BotClientService(BotHttpClientConfig clientConfig) {
+        this.client = clientConfig.botClient();
     }
 
     public DialogStateResponse getDialogState(Long id) {
