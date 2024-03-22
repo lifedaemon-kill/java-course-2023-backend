@@ -14,7 +14,13 @@ public class IsURLTest {
 
     @Test
     public void test2() {
-        String url = "questions/123456";
+        String url = "hello";
+        boolean response = LinkParse.isURL(url);
+        assertThat(response).isFalse();
+    }
+    @Test
+    public void test3() {
+        String url = "/hello/world.com";
         boolean response = LinkParse.isURL(url);
         assertThat(response).isFalse();
     }

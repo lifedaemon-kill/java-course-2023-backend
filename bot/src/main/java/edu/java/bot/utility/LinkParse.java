@@ -18,7 +18,7 @@ public class LinkParse {
 
     public static boolean isURL(String text) {
         try {
-            URI.create(text);
+            URI resp = new URI(text).toURL().toURI();
             return true;
         } catch (Exception e) {
             return false;
