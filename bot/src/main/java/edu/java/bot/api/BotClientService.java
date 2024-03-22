@@ -1,10 +1,14 @@
 package edu.java.bot.api;
 
 import database.DialogState;
+import dto.request.AddLinkRequest;
 import dto.request.ChangeDialogStateRequest;
 import dto.response.DialogStateResponse;
+import dto.response.LinkResponse;
+import dto.response.ListLinksResponse;
 import edu.java.bot.configuration.BotHttpClientConfig;
 import edu.java.bot.httpclient.BotHttpClient;
+import java.net.URI;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -20,20 +24,14 @@ public class BotClientService {
         this.client = clientConfig.botClient();
     }
 
-    public DialogStateResponse getDialogState(Long id) {
+    public ResponseEntity<DialogStateResponse> getDialogState(Long id) {
         return client.webClient
             .get()
             .uri("/state")
-            .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+            //.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
             .header("Tg-Chat-Id", id.toString())
             .retrieve()
-            .bodyToMono(DialogStateResponse.class)
-            .doOnError(error -> {
-                log.error(error.toString());
-            })
-            .doOnNext(response -> {
-                log.debug(String.format("dialog state response 200, user: %s", response.id().toString()));
-            })
+            .toEntity(DialogStateResponse.class)
             .block();
     }
 
@@ -49,13 +47,54 @@ public class BotClientService {
             .block();
     }
 
-    public ResponseEntity<Object> postRegisterChat(Long id) {
+    public ResponseEntity<Object> registerChat(Long id) {
         return client.webClient
             .post()
             .uri("/tg-chat/{id}", id)
-            .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
             .retrieve()
             .toEntity(Object.class)
+            .block();
+    }
+
+    public ResponseEntity<Object> deleteChat(Long id) {
+        return client.webClient
+            .delete()
+            .uri("/tg-chat/{id}", id)
+            .retrieve()
+            .toEntity(Object.class)
+            .block();
+    }
+
+    public ResponseEntity<ListLinksResponse> getLinks(Long id) {
+        return client.webClient
+            .get()
+            .uri("/links")
+            .header("Tg-Chat-Id", id.toString())
+            .retrieve()
+            .toEntity(ListLinksResponse.class)
+            .block();
+    }
+
+    public ResponseEntity<LinkResponse> addLink(Long id, URI link) {
+        return client.webClient
+            .post()
+            .uri("/links")
+            .header("Tg-Chat-Id", id.toString())
+            .bodyValue(new AddLinkRequest(link))
+            .retrieve()
+            .toEntity(LinkResponse.class)
+            .block();
+    }
+
+    public ResponseEntity<LinkResponse> deleteLink(Long id, URI link) {
+        return client.webClient
+            .delete()
+            .uri("/links")
+            .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+            .header("Tg-Chat-Id", id.toString())
+            .header("Link", link.toString())
+            .retrieve()
+            .toEntity(LinkResponse.class)
             .block();
     }
 }
