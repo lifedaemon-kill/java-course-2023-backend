@@ -4,7 +4,6 @@ import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.stereotype.Component;
 import static edu.java.bot.utility.CommandArchive.HELP;
 
 @Log4j2

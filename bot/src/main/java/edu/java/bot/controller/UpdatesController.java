@@ -19,7 +19,7 @@ import static edu.java.bot.utility.CommandArchive.START;
 
 @Log4j2
 public class UpdatesController {
-    public UpdatesController() {
+    private UpdatesController() {
     }
 
     private static boolean isMessageNotValid(Update update) {

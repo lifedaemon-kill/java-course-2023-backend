@@ -19,6 +19,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class BotClientService {
     private final BotHttpClient client;
+    private final String tgChatIdHeader = "Tg-Chat-Id";
+    private final String stateRepo = "/state";
+    private final String tgChatRepo = "/tg-chat/{id}";
+    private final String linksRepo = "/links";
 
     public BotClientService(BotHttpClientConfig clientConfig) {
         this.client = clientConfig.botClient();
@@ -27,9 +31,8 @@ public class BotClientService {
     public ResponseEntity<DialogStateResponse> getDialogState(Long id) {
         return client.webClient
             .get()
-            .uri("/state")
-            //.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-            .header("Tg-Chat-Id", id.toString())
+            .uri(stateRepo)
+            .header(tgChatIdHeader, id.toString())
             .retrieve()
             .toEntity(DialogStateResponse.class)
             .block();
@@ -38,9 +41,9 @@ public class BotClientService {
     public ResponseEntity<Object> postDialogState(Long id, DialogState dialogState) {
         return client.webClient
             .post()
-            .uri("/state")
+            .uri(stateRepo)
             .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-            .header("Tg-Chat-Id", id.toString())
+            .header(tgChatIdHeader, id.toString())
             .bodyValue((new ChangeDialogStateRequest(dialogState)))
             .retrieve()
             .toEntity(Object.class)
@@ -50,7 +53,7 @@ public class BotClientService {
     public ResponseEntity<Object> registerChat(Long id) {
         return client.webClient
             .post()
-            .uri("/tg-chat/{id}", id)
+            .uri(tgChatRepo, id)
             .retrieve()
             .toEntity(Object.class)
             .block();
@@ -59,7 +62,7 @@ public class BotClientService {
     public ResponseEntity<Object> deleteChat(Long id) {
         return client.webClient
             .delete()
-            .uri("/tg-chat/{id}", id)
+            .uri(tgChatRepo, id)
             .retrieve()
             .toEntity(Object.class)
             .block();
@@ -68,8 +71,8 @@ public class BotClientService {
     public ResponseEntity<ListLinksResponse> getLinks(Long id) {
         return client.webClient
             .get()
-            .uri("/links")
-            .header("Tg-Chat-Id", id.toString())
+            .uri(linksRepo)
+            .header(tgChatIdHeader, id.toString())
             .retrieve()
             .toEntity(ListLinksResponse.class)
             .block();
@@ -78,8 +81,8 @@ public class BotClientService {
     public ResponseEntity<LinkResponse> addLink(Long id, URI link) {
         return client.webClient
             .post()
-            .uri("/links")
-            .header("Tg-Chat-Id", id.toString())
+            .uri(linksRepo)
+            .header(tgChatIdHeader, id.toString())
             .bodyValue(new AddLinkRequest(link))
             .retrieve()
             .toEntity(LinkResponse.class)
@@ -89,9 +92,9 @@ public class BotClientService {
     public ResponseEntity<LinkResponse> deleteLink(Long id, URI link) {
         return client.webClient
             .delete()
-            .uri("/links")
+            .uri(linksRepo)
             .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-            .header("Tg-Chat-Id", id.toString())
+            .header(tgChatIdHeader, id.toString())
             .header("Link", link.toString())
             .retrieve()
             .toEntity(LinkResponse.class)
