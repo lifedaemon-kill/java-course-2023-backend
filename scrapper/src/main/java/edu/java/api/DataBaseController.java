@@ -58,7 +58,14 @@ public class DataBaseController {
     }
 
     public List<LinkResponse> getLinkList(Long id) {
-        return null;
+        List<LinkResponse> result = new ArrayList<>();
+        long count = 0L;
+        for (Map.Entry<URI, List<Long>> entry : linkUsers.entrySet()) {
+            if (entry.getValue().contains(id)) {
+                result.add(new LinkResponse(count++, entry.getKey()));
+            }
+        }
+        return result;
     }
     //End Links
 
