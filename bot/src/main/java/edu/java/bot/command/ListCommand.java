@@ -31,8 +31,10 @@ public class ListCommand implements Command {
                 break;
             case NOT_FOUND:
                 bot.execute(new SendMessage(update.message().chat().id(), "Вы не зарегистрированы"));
+                break;
             default:
                 bot.execute(new SendMessage(update.message().chat().id(), "Непредвиденный код ответа от сервера"));
+                break;
         }
     }
 

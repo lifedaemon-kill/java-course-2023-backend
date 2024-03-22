@@ -14,7 +14,7 @@ public class LinkParse {
     private LinkParse() {
     }
 
-    public enum LinkValidState {ACCEPT, NOT_URL, NOT_SUPPORTED_RESOURCE, NO_CONNECTION}
+    public enum LinkValidState { ACCEPT, NOT_URL, NOT_SUPPORTED_RESOURCE, NO_CONNECTION }
 
     public static boolean isURL(String text) {
         try {
