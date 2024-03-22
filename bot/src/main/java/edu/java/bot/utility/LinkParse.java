@@ -1,21 +1,24 @@
 package edu.java.bot.utility;
 
-
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import lombok.extern.log4j.Log4j2;
+import static edu.java.bot.utility.LinkParse.LinkValidState.ACCEPT;
+import static edu.java.bot.utility.LinkParse.LinkValidState.NOT_SUPPORTED_RESOURCE;
+import static edu.java.bot.utility.LinkParse.LinkValidState.NOT_URL;
+import static edu.java.bot.utility.LinkParse.LinkValidState.NO_CONNECTION;
 
 @Log4j2
 public class LinkParse {
     private LinkParse() {
     }
 
-    private static final int OK_CODE = 200;
+    public enum LinkValidState {ACCEPT, NOT_URL, NOT_SUPPORTED_RESOURCE, NO_CONNECTION}
 
     public static boolean isURL(String text) {
         try {
-            var ignore = new URI(text).toURL();
+            URI.create(text);
             return true;
         } catch (Exception e) {
             return false;
@@ -23,12 +26,8 @@ public class LinkParse {
     }
 
     public static boolean isURLSupports(String link) {
-        if (!isURL(link)) {
-            return false;
-        }
-        URI url;
         try {
-            url = new URI(link);
+            URI url = new URI(link);
             String urlDomain = url.getHost();
             log.debug("Ссылка " + urlDomain + " " + SupportedDomainsArchive.STRING_SET.contains(urlDomain));
             return SupportedDomainsArchive.STRING_SET.contains(urlDomain);
@@ -38,16 +37,27 @@ public class LinkParse {
     }
 
     public static boolean isResourceAvailable(String url) {
-
         try {
             URL link = new URI(url).toURL();
             HttpURLConnection connection = (HttpURLConnection) link.openConnection();
             connection.setRequestMethod("GET");
             int statusCode = connection.getResponseCode();
             connection.disconnect();
-            return statusCode == OK_CODE;
+            return statusCode == HttpURLConnection.HTTP_OK;
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    public static LinkValidState isLinkValidToUse(String link) {
+        if (!isURL(link)) {
+            return NOT_URL;
+        } else if (!isURLSupports(link)) {
+            return NOT_SUPPORTED_RESOURCE;
+        } else if (!isResourceAvailable(link)) {
+            return NO_CONNECTION;
+        } else {
+            return ACCEPT;
         }
     }
 }
