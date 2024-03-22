@@ -15,6 +15,7 @@ public class ScrapperApiConfig {
     @NotEmpty @NotNull
     @Value("http-client.baseURL")
     public String baseURL;
+
     @Bean
     public ScrapperHttpClient scrapperHttpClient(ScrapperApiConfig config) {
         return new ScrapperHttpClient(config);
