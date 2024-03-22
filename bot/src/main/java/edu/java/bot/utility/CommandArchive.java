@@ -1,8 +1,5 @@
 package edu.java.bot.utility;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class CommandArchive {
     public static final String START = "/start";
     public static final String TRACK = "/track";

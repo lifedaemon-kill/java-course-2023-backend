@@ -8,9 +8,8 @@ import org.springframework.stereotype.Component;
 import static edu.java.bot.utility.CommandArchive.HELP;
 
 @Log4j2
-@Component
 public class WrongCommand implements Command {
-    TelegramBot bot;
+    private final TelegramBot bot;
 
     public WrongCommand(TelegramBot bot) {
         this.bot = bot;

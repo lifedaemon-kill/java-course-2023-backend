@@ -1,4 +1,4 @@
 package api.exception;
 
-public class NotRegisteredException extends RuntimeException{
+public class NotRegisteredException extends RuntimeException {
 }

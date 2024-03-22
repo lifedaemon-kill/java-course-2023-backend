@@ -1,4 +1,4 @@
 package api.exception;
 
-public class UncorrectedParametersException extends RuntimeException{
+public class UncorrectedParametersException extends RuntimeException {
 }

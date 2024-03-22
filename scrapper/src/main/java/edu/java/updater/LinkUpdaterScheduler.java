@@ -11,6 +11,6 @@ import org.springframework.stereotype.Component;
 public class LinkUpdaterScheduler {
     @Scheduled(fixedDelayString = "${app.scheduler.interval}")
     void update() {
-        log.info("Запуск обновления состояния ссылок");
+        //log.info("Запуск обновления состояния ссылок");
     }
 }

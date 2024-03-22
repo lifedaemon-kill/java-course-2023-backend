@@ -2,14 +2,13 @@ package edu.java.api;
 
 import api.exception.AlreadyRegisteredException;
 import api.exception.NotFoundException;
-import api.exception.UncorrectedParametersException;
 import database.DialogState;
 import dto.request.AddLinkRequest;
 import dto.request.ChangeDialogStateRequest;
-import dto.request.RemoveLinkRequest;
 import dto.response.DialogStateResponse;
 import dto.response.LinkResponse;
 import dto.response.ListLinksResponse;
+import java.net.URI;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -55,15 +54,15 @@ public class ScrapperApiService {
         return new LinkResponse(id, request.link());
     }
 
-    public LinkResponse deleteLinkTracking(Long id, RemoveLinkRequest request) {
+    public LinkResponse deleteLinkTracking(Long id, URI link) {
         if (db.getDialogState(id) == null) {
             throw new NotFoundException();
         }
-        db.deleteIdFromLink(id, request.link());
-        return new LinkResponse(id, request.link());
+        db.deleteIdFromLink(id, link);
+        return new LinkResponse(id, link);
     }
 
-    public DialogStateResponse getDialogState(Long id) throws NotFoundException {
+    public DialogStateResponse getDialogState(Long id) {
         DialogState state = db.getDialogState(id);
         if (state == null) {
             throw new NotFoundException();
@@ -72,19 +71,11 @@ public class ScrapperApiService {
     }
 
     public DialogStateResponse changeDialogState(Long id, ChangeDialogStateRequest dialogStateRequest) {
-        if (!isIdValid(id)) {
-            throw new UncorrectedParametersException();
-        }
         if (db.getDialogState(id) == null) {
             throw new NotFoundException();
         }
 
         db.putDialogState(id, dialogStateRequest.dialogState());
         return new DialogStateResponse(id, dialogStateRequest.dialogState());
-    }
-
-    @Deprecated
-    private boolean isIdValid(Long id) {
-        return id > 0;
     }
 }

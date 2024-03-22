@@ -4,12 +4,12 @@ import api.exception.AlreadyRegisteredException;
 import api.exception.NotFoundException;
 import dto.request.AddLinkRequest;
 import dto.request.ChangeDialogStateRequest;
-import dto.request.RemoveLinkRequest;
 import dto.response.DialogStateResponse;
 import dto.response.LinkResponse;
 import dto.response.ListLinksResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import java.net.URI;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -79,9 +79,9 @@ public class ScrapperApiController {
     @DeleteMapping("/links")
     public LinkResponse deleteLinkTracking(
         @RequestHeader("Tg-Chat-Id") Long tgChatId,
-        @RequestBody RemoveLinkRequest request
+        @RequestHeader("Link") URI link
     ) {
-        return service.deleteLinkTracking(tgChatId, request);
+        return service.deleteLinkTracking(tgChatId, link);
     }
 
     @ApiResponses(value = {

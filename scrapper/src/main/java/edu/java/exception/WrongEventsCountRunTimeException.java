@@ -1,4 +1,4 @@
 package edu.java.exception;
 
-public class WrongEventsCountRunTimeException extends  RuntimeException{
+public class WrongEventsCountRunTimeException extends RuntimeException {
 }

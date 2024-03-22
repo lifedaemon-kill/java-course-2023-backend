@@ -1,4 +1,4 @@
 package api.exception;
 
-public class DataBaseNoConnectedException extends RuntimeException{
+public class DataBaseNoConnectedException extends RuntimeException {
 }

@@ -1,4 +1,4 @@
 package api.exception;
 
-public class LinkAlreadyAddedException extends RuntimeException{
+public class LinkAlreadyAddedException extends RuntimeException {
 }
