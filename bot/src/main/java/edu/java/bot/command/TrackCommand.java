@@ -5,14 +5,16 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import database.DialogState;
 import edu.java.bot.api.BotClientService;
+import java.net.URI;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
-import static edu.java.bot.utility.CommandArchive.TRACK;
+import static edu.java.bot.utility.LinkParse.isLinkValidToUse;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.OK;
 
 @Log4j2
-@Component
 public class TrackCommand implements Command {
+
     private final TelegramBot bot;
     private final BotClientService service;
 
@@ -23,18 +25,27 @@ public class TrackCommand implements Command {
 
     @Override
     public void execute(Update update) {
-        log.info(TRACK + " " + update.message().chat().id() + " Changing dialog state to WaitAdd");
-        ResponseEntity<Object> response =
-            service.postDialogState(update.message().chat().id(), DialogState.WaitURLToAdd);
+        Long id = update.message().chat().id();
+        String[] possibleLinks = update.message().text().split(" ");
+        service.postDialogState(id, DialogState.WaitMessage);
+        for (String link : possibleLinks) {
+            String text = switch (isLinkValidToUse(link)) {
+                case ACCEPT -> {
+                    var response = service.addLink(id, URI.create(link));
+                    yield switch (response.getStatusCode()) {
+                        case OK -> "Ссылка\n%s\nУспешно добавлена".formatted(link);
+                        case BAD_REQUEST -> "Неправильные параметры запроса";
+                        case NOT_FOUND -> "Вы не зарегистрированы\n/start";
+                        default -> "Непредвиденный код ответа от сервера";
+                    };
+                }
+                case NOT_URL -> "Данное сообщение не является ссылкой:%s".formatted(link);
+                case NOT_SUPPORTED_RESOURCE ->
+                    "Данный ресурс не поддерживается\n%s\n/help для информации".formatted(link);
+                case NO_CONNECTION -> "Не удалось сделать запрос по ссылке\n%s".formatted(link);
+            };
 
-        if (response.getStatusCode().is2xxSuccessful()) {
-            log.info(TRACK + " " + update.message().chat().id() + " Response successful");
-            bot.execute(new SendMessage(update.message().chat().id(), "Введите ссылку"));
-
-        } else {
-            log.error(TRACK + " " + update.message().chat().id() + " Response unsuccessful code: " +
-                      response.getStatusCode());
-            bot.execute(new SendMessage(update.message().chat().id(), "Произошла ошибка, попробуйте снова\n" + TRACK));
+            bot.execute(new SendMessage(id, text));
         }
     }
 }

@@ -5,7 +5,7 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 
 public class NotAutorizedCommand implements Command {
-    private TelegramBot bot;
+    private final TelegramBot bot;
 
     public NotAutorizedCommand(TelegramBot bot) {
         this.bot = bot;
