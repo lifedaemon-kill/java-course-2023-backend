@@ -1,7 +1,7 @@
 --liquibase formatted sql
 --changeset author:action
 
-create table dialog_state
+create table chat
 (
     id             bigint generated always as identity,
     state          int                      not null,

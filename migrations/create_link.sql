@@ -1,11 +1,11 @@
 --liquibase formatted sql
 --changeset author:action
 
-create table uri
+create table link
 (
     id         bigint generated always as identity,
-    uri        text                     not null,
+    url        text                     not null,
     created_at timestamp with time zone not null,
-    unique (uri),
+    unique (url),
     primary key (id)
 );
