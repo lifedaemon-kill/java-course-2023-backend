@@ -1,14 +1,25 @@
 package edu.java.scrapper;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import liquibase.Contexts;
+import liquibase.LabelExpression;
+import liquibase.Liquibase;
+import liquibase.database.Database;
+import liquibase.database.DatabaseFactory;
+import liquibase.database.jvm.JdbcConnection;
+import liquibase.exception.LiquibaseException;
+import liquibase.resource.ClassLoaderResourceAccessor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.JdbcDatabaseContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.MountableFile;
-import java.io.File;
-import java.nio.file.Path;
 
+@Log4j2
 @Testcontainers
 public abstract class IntegrationTest {
     public final static PostgreSQLContainer<?> POSTGRES;
@@ -24,13 +35,22 @@ public abstract class IntegrationTest {
     }
 
     private static void runMigrations(JdbcDatabaseContainer<?> c) {
-        Path migrationsPath = new File("migrations").toPath();
+        String url = c.getJdbcUrl();
+        String username = c.getUsername();
+        String password = c.getPassword();
 
-        for (File file : migrationsPath.toFile().listFiles()) {
-            if (file.isFile() && file.getName().endsWith(".sql")) {
-                MountableFile mountableFile = MountableFile.forHostPath(migrationsPath.resolve(file.getName()).toString());
-                c.copyFileToContainer(mountableFile, "/docker-entrypoint-initdb.d/" + file.getName());
-            }
+        try {
+            java.sql.Connection connection = DriverManager.getConnection(url, username, password);
+
+            Database database =
+                DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
+            Liquibase
+                liquibase =
+                new liquibase.Liquibase("master.xml", new ClassLoaderResourceAccessor(), database);
+            liquibase.update(new Contexts(), new LabelExpression());
+
+        } catch (SQLException | LiquibaseException e) {
+            log.error(e.getMessage());
         }
     }
 
