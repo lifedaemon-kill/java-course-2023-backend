@@ -11,6 +11,7 @@ services:
       - postgresql:/var/lib/postgresql/data
     networks:
       - backend
+
   liquibase-migrations:
     image: liquibase/liquibase:4.25
     depends_on:

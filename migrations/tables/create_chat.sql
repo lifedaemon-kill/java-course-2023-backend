@@ -7,5 +7,6 @@ create table chat
     state          int                      not null,
     last_update_at timestamp with time zone not null,
 
-    unique (id)
+    unique (id),
+    primary key (id)
 );
