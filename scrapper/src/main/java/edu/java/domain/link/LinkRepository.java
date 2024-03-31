@@ -1,6 +1,5 @@
 package edu.java.domain.link;
 
-import dto.response.LinkResponse;
 import edu.java.entity.Link;
 import java.net.URI;
 import java.util.Collection;
