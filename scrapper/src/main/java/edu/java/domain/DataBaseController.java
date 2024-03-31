@@ -1,4 +1,4 @@
-package edu.java.api;
+package edu.java.domain;
 
 import api.exception.LinkAlreadyAddedException;
 import api.exception.NotFoundException;
