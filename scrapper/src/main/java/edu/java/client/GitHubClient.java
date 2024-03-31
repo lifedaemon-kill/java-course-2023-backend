@@ -1,6 +1,6 @@
 package edu.java.client;
 
-import edu.java.model.TopicState;
+import edu.java.entity.TopicState;
 import edu.java.response.GitResponse;
 import org.springframework.stereotype.Component;
 

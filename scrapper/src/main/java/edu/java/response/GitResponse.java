@@ -1,7 +1,7 @@
 package edu.java.response;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.java.model.TopicState;
+import edu.java.entity.TopicState;
 import java.time.OffsetDateTime;
 import lombok.extern.log4j.Log4j2;
 
