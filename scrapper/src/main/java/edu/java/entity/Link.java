@@ -11,7 +11,7 @@ import java.net.URI;
 import java.time.OffsetDateTime;
 
 @Entity
-@Table(name="link")
+@Table(name = "link")
 public class Link {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

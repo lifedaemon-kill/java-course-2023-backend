@@ -1,7 +1,7 @@
 package edu.java.response;
 
-import edu.java.exception.WrongEventsCountRunTimeException;
 import edu.java.entity.TopicState;
+import edu.java.exception.WrongEventsCountRunTimeException;
 import lombok.Getter;
 
 @Getter
