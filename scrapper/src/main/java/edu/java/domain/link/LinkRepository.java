@@ -2,6 +2,7 @@ package edu.java.domain.link;
 
 import edu.java.entity.Link;
 import java.net.URI;
+import java.time.OffsetDateTime;
 import java.util.Collection;
 
 public interface LinkRepository {
@@ -9,5 +10,7 @@ public interface LinkRepository {
 
     void remove(URI link);
 
-    Collection<Link> findAll(String where);
+    Collection<Link> findAll();
+
+    Collection<Link> findByThreshold(OffsetDateTime thresholdTime);
 }

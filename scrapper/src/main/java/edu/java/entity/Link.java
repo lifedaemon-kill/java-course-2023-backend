@@ -9,7 +9,11 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.time.OffsetDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "link")
 public class Link {
@@ -25,7 +29,7 @@ public class Link {
     @NotNull
     private int answersCount;
 
-    @Column(name = "created_at")
+    @Column(name = "last_update_at")
     @NotNull
-    private OffsetDateTime createdAt;
+    private OffsetDateTime lastUpdateAt;
 }
