@@ -13,4 +13,6 @@ public interface LinkRepository {
     Collection<Link> findAll();
 
     Collection<Link> findByThreshold(OffsetDateTime thresholdTime);
+
+    Link findByUrl(URI link);
 }
