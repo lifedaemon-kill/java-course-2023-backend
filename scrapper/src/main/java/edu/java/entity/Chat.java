@@ -11,9 +11,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "chat")
+@Table(name = "Chat")
 public class Chat {
     @Id
+    @Column(name = "tg_chat_id", nullable = false)
     Long id;
     @Column(name = "state", nullable = false)
     Integer state;

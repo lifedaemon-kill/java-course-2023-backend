@@ -6,26 +6,21 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import java.net.URI;
-import java.time.OffsetDateTime;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "Link")
-public class Link {
+@Table(name = "LinksChats")
+public class LinkChat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "url", nullable = false)
-    private URI url;
+    @Column(name = "url_id")
+    private Long urlId;
 
-    @Column(name = "answers_count", nullable = false)
-    private int answersCount;
-
-    @Column(name = "last_update_at", nullable = false)
-    private OffsetDateTime lastUpdateAt;
+    @Column(name = "tg_chat_id")
+    private Long tgChatId;
 }
