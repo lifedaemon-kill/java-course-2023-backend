@@ -3,9 +3,9 @@ package edu.java.bot.command;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
-import model.DialogState;
 import edu.java.bot.api.BotClientService;
 import lombok.extern.log4j.Log4j2;
+import model.DialogState;
 import org.springframework.http.ResponseEntity;
 import static edu.java.bot.utility.CommandArchive.TRACK;
 

@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+@SuppressWarnings("MultipleStringLiterals")
 @Repository
 public class JdbcLinkChatRepository implements LinkChatRepository {
     private final JdbcTemplate jdbcTemplate;
@@ -43,8 +44,8 @@ public class JdbcLinkChatRepository implements LinkChatRepository {
     @Transactional
     @Override
     public Collection<URI> findAll() {
-        String sql = "SELECT l.url FROM link l " +
-                     "JOIN linkschats r ON l.id = r.url_id ";
+        String sql = "SELECT l.url FROM link l "
+                     + "JOIN linkschats r ON l.id = r.url_id ";
         RowMapper<URI> rowMapper = (rs, rowNum) -> URI.create(rs.getString("url"));
         try {
             return jdbcTemplate.query(sql, rowMapper);

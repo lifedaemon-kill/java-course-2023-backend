@@ -2,10 +2,10 @@ package edu.java.api.service;
 
 import api.exception.AlreadyRegisteredException;
 import api.exception.NotFoundException;
-import model.DialogState;
 import dto.request.ChangeDialogStateRequest;
 import dto.response.DialogStateResponse;
 import edu.java.entity.Chat;
+import model.DialogState;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

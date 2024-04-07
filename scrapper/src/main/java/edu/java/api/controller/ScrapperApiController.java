@@ -12,7 +12,6 @@ import edu.java.api.service.LinkApiService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.net.URI;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +26,7 @@ public class ScrapperApiController {
     private final ChatApiService chatService;
     private final LinkApiService linkService;
 
-    public ScrapperApiController(ChatApiService chatService, LinkApiService linkService){
+    public ScrapperApiController(ChatApiService chatService, LinkApiService linkService) {
         this.chatService = chatService;
         this.linkService = linkService;
     }
@@ -75,7 +74,6 @@ public class ScrapperApiController {
     ) {
         return chatService.changeDialogState(tgChatId, dialogStateRequest);
     }
-
 
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Links have been successfully received"),

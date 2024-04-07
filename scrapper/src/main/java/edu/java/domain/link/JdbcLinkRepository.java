@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+@SuppressWarnings("MultipleStringLiterals")
 @Repository
 public class JdbcLinkRepository implements LinkRepository {
     private final JdbcTemplate jdbcTemplate;
@@ -67,10 +68,10 @@ public class JdbcLinkRepository implements LinkRepository {
     @Override
     public Link findByUrl(URI url) {
         String sql = "SELECT * FROM Link WHERE url = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[] {url.toString()}, linkRowMapper);
+        return jdbcTemplate.queryForObject(sql, new Object[] {url.toString()}, LINK_ROW_MAPPER);
     }
 
-    private static final RowMapper<Link> linkRowMapper = (rs, rowNum) -> {
+    private static final RowMapper<Link> LINK_ROW_MAPPER = (rs, rowNum) -> {
         Long id = rs.getLong("id");
         URI url = URI.create(rs.getString("url"));
         int answerCount = rs.getInt("answers_count");
