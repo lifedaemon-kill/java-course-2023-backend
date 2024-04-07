@@ -10,25 +10,25 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ConfigurationProperties(prefix = "spring.datasource", ignoreUnknownFields = false)
+//@ConfigurationProperties(prefix = "spring.datasource", ignoreUnknownFields = false)
 @EnableTransactionManagement
 public class JdbcConfiguration {
-    @Value("url")
+    @Value("spring.datasource.url")
     private String url;
-    @Value("username")
+    @Value("spring.datasource.username")
     private String username;
-    @Value("password")
+    @Value("spring.datasource.password")
     private String password;
-    @Value("driver-class-name")
+    @Value("spring.datasource.driver-class-name")
     private String driver;
-
+    /*
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUrl(url);
-        dataSource.setUsername(username);
-        dataSource.setPassword(password);
-        dataSource.setDriverClassName(driver);
+        dataSource.setUrl(this.url);
+        dataSource.setUsername(this.username);
+        dataSource.setPassword(this.password);
+        dataSource.setDriverClassName(this.driver);
 
         return dataSource;
     }
@@ -37,4 +37,6 @@ public class JdbcConfiguration {
     public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(dataSource());
     }
+
+    */
 }
