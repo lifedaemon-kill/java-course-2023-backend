@@ -1,6 +1,5 @@
 package edu.java.configuration;
 
-import database.DataBase;
 import edu.java.api.httpclient.ScrapperHttpClient;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -19,10 +18,5 @@ public class ScrapperApiConfig {
     @Bean
     public ScrapperHttpClient scrapperHttpClient(ScrapperApiConfig config) {
         return new ScrapperHttpClient(config);
-    }
-
-    @Bean
-    public DataBase dataBase() {
-        return new DataBase();
     }
 }

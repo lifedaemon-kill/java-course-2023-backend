@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset action::author1
+--changeset author:action
 
 create table LinksChats
 (
