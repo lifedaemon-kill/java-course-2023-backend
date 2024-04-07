@@ -1,12 +1,12 @@
 --liquibase formatted sql
---changeset author:action
+--changeset action::author
 
 create table chat
 (
-    id             bigint generated always as identity,
+    tg_chat_id     bigint                   not null,
     state          int                      not null,
     last_update_at timestamp with time zone not null,
 
-    unique (id),
-    primary key (id)
+    unique (tg_chat_id),
+    primary key (tg_chat_id)
 );

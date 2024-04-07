@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset author:action
+--changeset action::author
 
 create table link
 (
