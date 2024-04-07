@@ -1,7 +1,7 @@
 --liquibase formatted sql
---changeset action::author
+--changeset action::author1
 
-create table link
+create table Link
 (
     id              bigint generated always as identity,
     url             text                     not null,

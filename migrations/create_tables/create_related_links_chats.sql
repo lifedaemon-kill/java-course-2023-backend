@@ -1,12 +1,14 @@
 --liquibase formatted sql
---changeset action::author
+--changeset action::author1
 
-create table related_links_chats
+create table LinksChats
 (
-    uri_id     bigint not null,
+    id         bigint generated always as identity,
+    url_id     bigint not null,
     tg_chat_id bigint not null,
 
-    foreign key (uri_id) references link (id)
+    foreign key (url_id) references Link (id),
+    foreign key (tg_chat_id) references Chat (tg_chat_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
