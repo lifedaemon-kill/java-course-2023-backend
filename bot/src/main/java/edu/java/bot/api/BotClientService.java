@@ -1,6 +1,6 @@
 package edu.java.bot.api;
 
-import database.DialogState;
+import model.DialogState;
 import dto.request.AddLinkRequest;
 import dto.request.ChangeDialogStateRequest;
 import dto.response.DialogStateResponse;
