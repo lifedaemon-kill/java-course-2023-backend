@@ -2,14 +2,11 @@ package edu.java.domain.linksChats;
 
 import edu.java.entity.LinkChat;
 import java.net.URI;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Collection;
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 @SuppressWarnings("MultipleStringLiterals")
 @Repository
@@ -20,28 +17,24 @@ public class JdbcLinkChatRepository implements LinkChatRepository {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    @Transactional
     @Override
     public void add(Long urlId, Long chatId) {
         String sql = "INSERT INTO LinksChats (url_id, tg_chat_id) VALUES (?, ?)";
         jdbcTemplate.update(sql, urlId, chatId);
     }
 
-    @Transactional
     @Override
-    public int remove(Long urlId, Long chatId) {
+    public void remove(Long urlId, Long chatId) {
         String sql = "DELETE FROM LinksChats WHERE (url_id = ? AND tg_chat_id = ?)";
-        return jdbcTemplate.update(sql, urlId, chatId);
+        jdbcTemplate.update(sql, urlId, chatId);
     }
 
-    @Transactional
     @Override
-    public int remove(Long chatId) {
+    public void remove(Long chatId) {
         String sql = "DELETE FROM LinksChats WHERE tg_chat_id = ?";
-        return jdbcTemplate.update(sql, chatId);
+        jdbcTemplate.update(sql, chatId);
     }
 
-    @Transactional
     @Override
     public Collection<URI> findAll() {
         String sql = "SELECT l.url FROM link l "
@@ -54,7 +47,6 @@ public class JdbcLinkChatRepository implements LinkChatRepository {
         }
     }
 
-    @Transactional
     @Override
     public Collection<URI> findAllById(Long chatId) {
         String sql = "SELECT l.url FROM link l "
@@ -70,25 +62,16 @@ public class JdbcLinkChatRepository implements LinkChatRepository {
     }
 
     @Override
-    public LinkChat findOne(URI url, Long id) {
-        String sql = "SELECT * FROM LinksChats WHERE tg_chat_id = ? AND url_id = ?";
+    public LinkChat findOne(Long url, Long id) {
+        String sql = "SELECT * FROM LinksChats WHERE (tg_chat_id = ? AND url_id = ?)";
         Object[] params = {id, url};
-        try {
-            return jdbcTemplate.queryForObject(sql, params, new LinkChatMapper());
-        } catch (Exception e) {
-            return null;
-        }
-    }
 
-    private static class LinkChatMapper implements RowMapper<LinkChat> {
-        @Override
-        public LinkChat mapRow(ResultSet rs, int rowNum) throws SQLException {
+        return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> {
             LinkChat linkChat = new LinkChat();
             linkChat.setId(rs.getLong("id"));
             linkChat.setUrlId(rs.getLong("url_id"));
             linkChat.setTgChatId(rs.getLong("tg_chat_id"));
             return linkChat;
-        }
+        });
     }
-
 }
