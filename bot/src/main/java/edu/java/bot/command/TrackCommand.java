@@ -8,6 +8,7 @@ import java.net.URI;
 import lombok.extern.log4j.Log4j2;
 import model.DialogState;
 import static edu.java.bot.utility.LinkParse.isLinkValidToUse;
+import static org.springframework.http.HttpStatus.ALREADY_REPORTED;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
@@ -36,6 +37,7 @@ public class TrackCommand implements Command {
                         case OK -> "Ссылка\n%s\nУспешно добавлена".formatted(link);
                         case BAD_REQUEST -> "Неправильные параметры запроса";
                         case NOT_FOUND -> "Вы не зарегистрированы\n/start";
+                        case ALREADY_REPORTED -> "Данная ссылка уже добавлена";
                         default -> "Непредвиденный код ответа от сервера";
                     };
                 }

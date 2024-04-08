@@ -37,7 +37,7 @@ public class UpdatesController {
 
             String text = update.message().text();
             Long id = update.message().chat().id();
-            log.debug(id + " " + text);
+            log.info(id + " " + text);
 
             if (text.equals(START)) {
                 StartCommand start = new StartCommand(bot, service);
