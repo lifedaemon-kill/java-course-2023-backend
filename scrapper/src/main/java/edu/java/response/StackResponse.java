@@ -1,22 +1,24 @@
 package edu.java.response;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.java.entity.TopicState;
 import java.time.OffsetDateTime;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.boot.configurationprocessor.json.JSONArray;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 
 @Log4j2
 public class StackResponse extends Response {
     @Override
-    public int getAnswersCount(String json) throws WrongThreadException {
+    public int getAnswersCount(String json_string) {
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode jsonNode = objectMapper.readTree(json);
-            return jsonNode.get("answer_count").asInt();
-        } catch (Exception e) {
-            log.error(e);
-            throw new WrongThreadException();
+            JSONObject jsonObject = new JSONObject(json_string);
+            JSONArray items = jsonObject.getJSONArray("items");
+            JSONObject item = items.getJSONObject(0);
+            return item.getInt("answer_count");
+
+        } catch (JSONException e) {
+            return -1;
         }
     }
 

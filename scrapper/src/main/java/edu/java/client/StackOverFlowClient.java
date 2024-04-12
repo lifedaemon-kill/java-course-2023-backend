@@ -2,6 +2,8 @@ package edu.java.client;
 
 import edu.java.entity.TopicState;
 import edu.java.response.StackResponse;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,7 +17,7 @@ public class StackOverFlowClient extends Client {
     }
 
     @Override
-    public String getRepository(String id) {
+    public String getRowData(String id) {
         return webClient.get()
             .uri("%s?order=desc&sort=activity&site=stackoverflow".formatted(id))
             .retrieve()
@@ -24,8 +26,19 @@ public class StackOverFlowClient extends Client {
     }
 
     @Override
-    public TopicState getPayload(String json) {
+    public TopicState getPayloadData(String json) {
         StackResponse response = new StackResponse(json);
         return response.getData();
+    }
+
+    @Override
+    public String getRepositoryIDFromLink(String link) {
+        Pattern pattern = Pattern.compile(".*/(\\d+).*");
+        Matcher matcher = pattern.matcher(link);
+        if (matcher.matches()) {
+            return matcher.group(1);
+        } else {
+            return null;
+        }
     }
 }

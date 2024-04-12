@@ -14,7 +14,9 @@ public abstract class Client {
         this("http://localhost:");
     }
 
-    public abstract String getRepository(String repository);
+    public abstract String getRowData(String repository);
 
-    public abstract TopicState getPayload(String json);
+    public abstract TopicState getPayloadData(String json);
+
+    public abstract String getRepositoryIDFromLink(String link);
 }

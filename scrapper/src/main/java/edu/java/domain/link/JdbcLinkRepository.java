@@ -25,6 +25,12 @@ public class JdbcLinkRepository implements LinkRepository {
     }
 
     @Override
+    public void update(URI link, int answers_count ,OffsetDateTime updatedOn) {
+        String sql = "UPDATE Link SET answers_count = ?, last_update_at = ? WHERE url = ?";
+        jdbcTemplate.update(sql, answers_count, updatedOn, link.toString());
+    }
+
+    @Override
     public void remove(URI link) {
         String sql = "DELETE FROM Link WHERE url = ?";
         jdbcTemplate.update(sql, link);
