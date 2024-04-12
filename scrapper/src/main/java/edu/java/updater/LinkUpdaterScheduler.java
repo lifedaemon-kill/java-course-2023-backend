@@ -35,7 +35,7 @@ public class LinkUpdaterScheduler {
     private LinkChatRepository relationRepository;
     @Value("${app.scheduler.interval}")
     private int interval;
-    @Value("force-check-delay")
+    @Value("${app.scheduler.force-check-delay}")
     private int forceCheckDelay;
 
     @Scheduled(fixedDelayString = "${app.scheduler.interval}")
