@@ -7,7 +7,8 @@ import java.util.Collection;
 
 public interface LinkRepository {
     void add(URI link);
-    void update(URI link, int answers_count, OffsetDateTime updatedOn);
+
+    void update(URI link, int answersCount, OffsetDateTime updatedOn);
 
     void remove(URI link);
 

@@ -1,6 +1,5 @@
 package edu.java.bot.command;
 
-import api.exception.NotFoundException;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
@@ -34,7 +33,7 @@ public class DeleteLinkCommand implements Command {
                 text = switch (response.getStatusCode()) {
                     case OK -> "Ссылка\n%s\nУспешно удалена".formatted(link);
                     case BAD_REQUEST -> "Неправильные параметры запроса";
-                    case NOT_FOUND -> "Этой ссылки нет в вашем списке";
+                    case NOT_FOUND -> "Этой ссылки нет в списке";
                     case INTERNAL_SERVER_ERROR -> "Сервер не работает в данный момент";
                     default -> "Непредвиденный код ответа от сервера";
                 };

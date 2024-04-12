@@ -4,7 +4,6 @@ import edu.java.entity.LinkChat;
 import java.net.URI;
 import java.util.Collection;
 import javax.sql.DataSource;
-import model.LinkUpdate;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -66,7 +65,7 @@ public class JdbcLinkChatRepository implements LinkChatRepository {
     public Collection<Long> findAllByUrlId(Long urlId) {
         String sql = "SELECT l.tg_chat_id FROM linkschats l WHERE l.url_id = ?";
 
-        return jdbcTemplate.query(sql, new Object[]{urlId}, (rs, rowNum) -> rs.getLong("tg_chat_id"));
+        return jdbcTemplate.query(sql, new Object[] {urlId}, (rs, rowNum) -> rs.getLong("tg_chat_id"));
     }
 
     @Override

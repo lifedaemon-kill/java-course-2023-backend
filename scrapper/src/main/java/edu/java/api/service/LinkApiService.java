@@ -14,7 +14,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Log4j2
 @Service
@@ -56,7 +55,6 @@ public class LinkApiService extends AbstractApiService {
 
         return new LinkResponse(id, request.link());
     }
-
 
     public LinkResponse deleteLinkTracking(Long id, URI url) {
         if (!isChatExist(id)) {

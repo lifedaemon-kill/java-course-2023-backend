@@ -35,19 +35,19 @@ public class LinkUpdaterScheduler {
     private LinkChatRepository relationRepository;
     @Value("${app.scheduler.interval}")
     private int interval;
+    @Value("force-check-delay")
+    private int forceCheckDelay;
 
     @Scheduled(fixedDelayString = "${app.scheduler.interval}")
     void update() {
         log.info("Start link updater");
         Collection<Link> linkCollection =
-            linkRepository.findByThreshold(OffsetDateTime.now().minusSeconds(30));
+            linkRepository.findByThreshold(OffsetDateTime.now().minusSeconds(forceCheckDelay));
         Collection<Link> linkFullCollection = linkRepository.findAll();
 
         log.info("Found {} links", linkFullCollection.size());
         log.info("Found {} links with threshold", linkCollection.size());
         Client client;
-        GitHubClient gitHubClient = new GitHubClient();
-        StackOverFlowClient stackOverFlowClient = new StackOverFlowClient();
 
         for (Link link : linkCollection) {
             log.debug("Updating link {}", link.getUrl());

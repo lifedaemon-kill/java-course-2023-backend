@@ -10,9 +10,9 @@ import org.springframework.boot.configurationprocessor.json.JSONObject;
 @Log4j2
 public class StackResponse extends Response {
     @Override
-    public int getAnswersCount(String json_string) {
+    public int getAnswersCount(String jsonString) {
         try {
-            JSONObject jsonObject = new JSONObject(json_string);
+            JSONObject jsonObject = new JSONObject(jsonString);
             JSONArray items = jsonObject.getJSONArray("items");
             JSONObject item = items.getJSONObject(0);
             return item.getInt("answer_count");

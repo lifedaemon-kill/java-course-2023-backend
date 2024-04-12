@@ -66,6 +66,7 @@ public class ExceptionApiHandler {
                 exception.getStackTrace()
             ));
     }
+
     @ExceptionHandler(DataBaseNoConnectedException.class)
     public ResponseEntity<ApiErrorResponse> notFoundException(DataBaseNoConnectedException exception) {
         return ResponseEntity
@@ -78,14 +79,15 @@ public class ExceptionApiHandler {
                 exception.getStackTrace()
             ));
     }
+
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiErrorResponse> notFoundException(Exception exception) {
+    public ResponseEntity<ApiErrorResponse> badException(Exception exception) {
         return ResponseEntity
             .status(HttpStatus.BAD_GATEWAY)
             .body(new ApiErrorResponse(
                 "Server error",
                 "502",
-                "Server error",
+                "BadException",
                 "Unknown error",
                 exception.getStackTrace()
             ));
