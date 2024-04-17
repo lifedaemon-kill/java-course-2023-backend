@@ -1,10 +1,10 @@
 package edu.java.domain.jooq;
 
+import edu.java.domain.jooq.codegen.Tables;
 import edu.java.domain.repository.LinkChatRepository;
 import edu.java.entity.LinkChat;
 import java.net.URI;
 import java.util.Collection;
-import java.util.List;
 import javax.sql.DataSource;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
@@ -21,36 +21,76 @@ public class JooqLinkChatRepository implements LinkChatRepository {
 
     @Override
     public void add(Long urlId, Long chatId) {
-
+        dslContext.insertInto(Tables.LINKSCHATS)
+            .set(Tables.LINKSCHATS.URL_ID, urlId)
+            .set(Tables.LINKSCHATS.TG_CHAT_ID, chatId)
+            .execute();
     }
 
     @Override
     public void remove(Long urlId, Long chatId) {
-
+        dslContext.deleteFrom(Tables.LINKSCHATS)
+            .where(Tables.LINKSCHATS.URL_ID.eq(urlId)
+                .and(Tables.LINKSCHATS.TG_CHAT_ID.eq(chatId)))
+            .execute();
     }
 
     @Override
     public void remove(Long chatId) {
-
+        dslContext.deleteFrom(Tables.LINKSCHATS)
+            .where(Tables.LINKSCHATS.TG_CHAT_ID.eq(chatId))
+            .execute();
     }
 
     @Override
     public Collection<URI> findAll() {
-        return List.of();
+        try {
+            return dslContext.select(Tables.LINK.URL)
+                .from(Tables.LINK)
+                .join(Tables.LINKSCHATS)
+                .on(Tables.LINK.ID.eq(Tables.LINKSCHATS.URL_ID))
+                .fetch()
+                .map(record -> URI.create(record.value1()));
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
     public Collection<URI> findAllById(Long chatId) {
-        return List.of();
+        try {
+            return dslContext.select(Tables.LINK.URL)
+                .from(Tables.LINK)
+                .join(Tables.LINKSCHATS)
+                .on(Tables.LINK.ID.eq(Tables.LINKSCHATS.URL_ID))
+                .where(Tables.LINKSCHATS.TG_CHAT_ID.eq(chatId))
+                .fetch()
+                .map(record -> URI.create(record.value1()));
+
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
-    public Collection<Long> findAllByUrlId(Long chatId) {
-        return List.of();
+    public Collection<Long> findAllByUrlId(Long urlId) {
+        return dslContext.select(Tables.LINKSCHATS.TG_CHAT_ID)
+            .from(Tables.LINKSCHATS)
+            .where(Tables.LINKSCHATS.URL_ID.eq(urlId))
+            .fetchInto(Long.class);
     }
 
     @Override
     public LinkChat findOne(Long urlId, Long tgChatId) {
+        var record = dslContext.select()
+            .from(Tables.LINKSCHATS)
+            .where(Tables.LINKSCHATS.TG_CHAT_ID.eq(tgChatId)
+                .and(Tables.LINKSCHATS.URL_ID.eq(urlId)))
+            .fetchOne();
+
+        if (record != null) {
+            return record.into(LinkChat.class);
+        }
         return null;
     }
 }
