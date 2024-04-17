@@ -1,7 +1,5 @@
 package edu.java.client;
 
-import edu.java.entity.TopicState;
-import edu.java.response.StackResponse;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.springframework.stereotype.Component;

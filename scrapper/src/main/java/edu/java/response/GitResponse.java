@@ -10,14 +10,12 @@ import java.util.List;
 import lombok.extern.log4j.Log4j2;
 import model.EventType;
 import model.UpdateInfo;
-import org.springframework.boot.configurationprocessor.json.JSONException;
 
 @Log4j2
 public class GitResponse implements Response {
     @Override
-    public TopicState getPayload(String json) throws WrongEventsCountRunTimeException, JSONException {
+    public TopicState getPayload(String json) throws WrongEventsCountRunTimeException {
         List<UpdateInfo> infoList = new ArrayList<>();
-        int count = -1;
         try {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode jsonNode = mapper.readTree(json);
@@ -42,6 +40,4 @@ public class GitResponse implements Response {
 
     private GitResponse() {
     }
-
-    ;
 }

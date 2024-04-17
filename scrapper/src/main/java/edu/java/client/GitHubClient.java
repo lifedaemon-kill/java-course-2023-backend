@@ -1,7 +1,5 @@
 package edu.java.client;
 
-import edu.java.entity.TopicState;
-import edu.java.response.GitResponse;
 import java.util.Arrays;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
