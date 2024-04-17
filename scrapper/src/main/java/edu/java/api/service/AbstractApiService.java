@@ -1,8 +1,8 @@
 package edu.java.api.service;
 
-import edu.java.domain.chat.JdbcChatRepository;
-import edu.java.domain.link.JdbcLinkRepository;
-import edu.java.domain.linksChats.LinkChatRepository;
+import edu.java.domain.jdbc.JdbcChatRepository;
+import edu.java.domain.jdbc.JdbcLinkRepository;
+import edu.java.domain.repository.LinkChatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
