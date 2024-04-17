@@ -1,4 +1,4 @@
-package edu.java.domain.linksChats;
+package edu.java.domain.repository;
 
 import edu.java.entity.LinkChat;
 import java.net.URI;

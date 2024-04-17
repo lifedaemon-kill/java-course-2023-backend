@@ -1,5 +1,6 @@
-package edu.java.domain.chat;
+package edu.java.domain.jdbc;
 
+import edu.java.domain.repository.ChatRepository;
 import edu.java.entity.Chat;
 import java.sql.ResultSet;
 import java.sql.SQLException;

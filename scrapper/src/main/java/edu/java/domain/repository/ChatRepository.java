@@ -1,4 +1,4 @@
-package edu.java.domain.chat;
+package edu.java.domain.repository;
 
 import edu.java.entity.Chat;
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package edu.java.domain.link;
+package edu.java.domain.repository;
 
 import edu.java.entity.Link;
 import java.net.URI;

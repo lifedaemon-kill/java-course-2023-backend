@@ -1,5 +1,6 @@
-package edu.java.domain.link;
+package edu.java.domain.jdbc;
 
+import edu.java.domain.repository.LinkRepository;
 import edu.java.entity.Link;
 import java.net.URI;
 import java.net.URISyntaxException;
