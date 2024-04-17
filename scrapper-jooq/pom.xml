@@ -35,6 +35,11 @@
             <version>3.19.7</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq-meta</artifactId>
+            <version>3.19.7</version>
+        </dependency>
 
         <dependency>
             <groupId>org.liquibase</groupId>
