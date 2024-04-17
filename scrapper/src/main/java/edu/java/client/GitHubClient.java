@@ -40,12 +40,6 @@ public class GitHubClient extends Client {
     }
 
     @Override
-    public TopicState getPayloadData(String json) {
-        GitResponse response = new GitResponse(json);
-        return response.getData();
-    }
-
-    @Override
     public String getRepositoryIDFromLink(String link) {
         //https://github.com/me/myrepos/... -> /me/myrepos/...
 

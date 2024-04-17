@@ -26,12 +26,6 @@ public class StackOverFlowClient extends Client {
     }
 
     @Override
-    public TopicState getPayloadData(String json) {
-        StackResponse response = new StackResponse(json);
-        return response.getData();
-    }
-
-    @Override
     public String getRepositoryIDFromLink(String link) {
         Pattern pattern = Pattern.compile(".*/(\\d+).*");
         Matcher matcher = pattern.matcher(link);

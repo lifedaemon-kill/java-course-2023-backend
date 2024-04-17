@@ -5,5 +5,5 @@ public enum EventType {
     GIT_BRANCH,
     GIT_PUSH,
     GIT_COMMIT,
-    STACK_ANSWER
+    GIT_PULL, STACK_ANSWER
 }

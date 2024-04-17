@@ -16,7 +16,5 @@ public abstract class Client {
 
     public abstract String getRowData(String repository);
 
-    public abstract TopicState getPayloadData(String json);
-
     public abstract String getRepositoryIDFromLink(String link);
 }

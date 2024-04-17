@@ -8,6 +8,9 @@ import edu.java.domain.link.LinkRepository;
 import edu.java.domain.linksChats.LinkChatRepository;
 import edu.java.entity.Link;
 import edu.java.entity.TopicState;
+import edu.java.response.GitResponse;
+import edu.java.response.Response;
+import edu.java.response.StackResponse;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,10 +37,12 @@ public class LinkUpdaterScheduler {
     private LinkRepository linkRepository;
     @Autowired
     private LinkChatRepository relationRepository;
-    @Value("${app.scheduler.interval}")
-    private int interval;
     @Value("${app.scheduler.force-check-delay}")
     private int forceCheckDelay;
+
+    private Response response;
+    private GitResponse gitResponse;
+    private StackResponse stackResponse;
 
     @Scheduled(fixedDelayString = "${app.scheduler.interval}")
     void update() {
@@ -50,7 +55,7 @@ public class LinkUpdaterScheduler {
         Client client;
 
         for (Link link : linkCollection) {
-            log.debug("Updating link {}", link.getUrl());
+            log.info("Updating link {}", link.getUrl());
             String host = link.getUrl().getHost();
 
             TopicState newData = null;
@@ -60,9 +65,11 @@ public class LinkUpdaterScheduler {
             switch (host) {
                 case "github.com" -> {
                     client = gitHubClient;
+                    response = gitResponse;
                 }
                 case "stackoverflow.com", "ru.stackoverflow.com" -> {
                     client = stackOverFlowClient;
+                    response = stackResponse;
                 }
                 default -> {
                     log.error("This link don't match any available pattern in the database: {}", link.getUrl());
@@ -71,7 +78,7 @@ public class LinkUpdaterScheduler {
             }
 
             identification = client.getRepositoryIDFromLink(link.getUrl().toString());
-            //GETTING IDENTIFICATION
+            //GET IDENTIFICATION
             if (identification == null) {
                 log.error("Link {} don't match github pattern", link.getUrl());
                 continue;
@@ -87,7 +94,7 @@ public class LinkUpdaterScheduler {
 
             //GETTING PAYLOAD FROM ROW DATA
             try {
-                newData = client.getPayloadData(rowData);
+                newData = response.getPayload(rowData);
             } catch (Exception e) {
                 log.error("Server unable to resolve json from api");
             }
