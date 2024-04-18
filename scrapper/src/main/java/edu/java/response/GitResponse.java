@@ -38,6 +38,6 @@ public class GitResponse implements Response {
         return new TopicState(OffsetDateTime.now(), infoList.size(), infoList);
     }
 
-    private GitResponse() {
+    public GitResponse() {
     }
 }

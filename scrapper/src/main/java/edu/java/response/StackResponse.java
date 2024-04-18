@@ -32,6 +32,6 @@ public class StackResponse implements Response {
         return new TopicState(OffsetDateTime.now(), count, infoList);
     }
 
-    private StackResponse() {
+    public StackResponse() {
     }
 }
