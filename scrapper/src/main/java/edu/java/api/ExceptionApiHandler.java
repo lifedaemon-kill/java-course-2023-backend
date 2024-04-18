@@ -2,6 +2,7 @@ package edu.java.api;
 
 import api.errorResponse.ApiErrorResponse;
 import api.exception.AlreadyRegisteredException;
+import api.exception.DataBaseNoConnectedException;
 import api.exception.LinkAlreadyAddedException;
 import api.exception.NotFoundException;
 import api.exception.UncorrectedParametersException;
@@ -62,6 +63,32 @@ public class ExceptionApiHandler {
                 "404",
                 "NotFoundException",
                 "Chat not found",
+                exception.getStackTrace()
+            ));
+    }
+
+    @ExceptionHandler(DataBaseNoConnectedException.class)
+    public ResponseEntity<ApiErrorResponse> notFoundException(DataBaseNoConnectedException exception) {
+        return ResponseEntity
+            .status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .body(new ApiErrorResponse(
+                "Database not working",
+                "500",
+                "DataBaseNoConnectedException",
+                "Database error",
+                exception.getStackTrace()
+            ));
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiErrorResponse> badException(Exception exception) {
+        return ResponseEntity
+            .status(HttpStatus.BAD_GATEWAY)
+            .body(new ApiErrorResponse(
+                "Server error",
+                "502",
+                "BadException",
+                "Unknown error",
                 exception.getStackTrace()
             ));
     }

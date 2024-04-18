@@ -1,6 +1,6 @@
 package dto.response;
 
-import database.DialogState;
+import model.DialogState;
 
 public record DialogStateResponse(
     Long id,

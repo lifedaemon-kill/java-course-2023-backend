@@ -1,14 +1,14 @@
 app:
   scheduler:
     enable: true
-    interval: 12000
-    force-check-delay: 12000
+    interval: 20000
+    force-check-delay: 60
 
 spring:
   application:
     name: scrapper
   liquibase:
-    enabled: false
+    enabled: off
   datasource:
     url: jdbc:postgresql://localhost:5432/scrapper
     username: postgres

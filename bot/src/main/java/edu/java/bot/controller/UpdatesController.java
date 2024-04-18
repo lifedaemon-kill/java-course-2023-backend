@@ -3,7 +3,6 @@ package edu.java.bot.controller;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
-import database.DialogState;
 import dto.response.DialogStateResponse;
 import edu.java.bot.api.BotClientService;
 import edu.java.bot.command.DeleteLinkCommand;
@@ -13,6 +12,7 @@ import edu.java.bot.command.TrackCommand;
 import edu.java.bot.handler.BasicCommandsHandler;
 import java.util.List;
 import lombok.extern.log4j.Log4j2;
+import model.DialogState;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import static edu.java.bot.utility.CommandArchive.START;
@@ -37,7 +37,7 @@ public class UpdatesController {
 
             String text = update.message().text();
             Long id = update.message().chat().id();
-            log.debug(id + " " + text);
+            log.info(id + " " + text);
 
             if (text.equals(START)) {
                 StartCommand start = new StartCommand(bot, service);

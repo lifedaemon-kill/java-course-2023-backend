@@ -1,6 +1,6 @@
 package dto.request;
 
-import database.DialogState;
+import model.DialogState;
 
 public record ChangeDialogStateRequest(
     DialogState dialogState

@@ -1,6 +1,5 @@
 package edu.java.bot.api;
 
-import database.DialogState;
 import dto.request.AddLinkRequest;
 import dto.request.ChangeDialogStateRequest;
 import dto.response.DialogStateResponse;
@@ -10,6 +9,7 @@ import edu.java.bot.configuration.BotHttpClientConfig;
 import edu.java.bot.httpclient.BotHttpClient;
 import java.net.URI;
 import lombok.extern.log4j.Log4j2;
+import model.DialogState;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
