@@ -4,8 +4,8 @@ import edu.java.api.httpclient.ScrapperHttpClientService;
 import edu.java.client.Client;
 import edu.java.client.GitHubClient;
 import edu.java.client.StackOverFlowClient;
-import edu.java.domain.repository.LinkRepository;
 import edu.java.domain.repository.LinkChatRepository;
+import edu.java.domain.repository.LinkRepository;
 import edu.java.entity.Link;
 import edu.java.entity.TopicState;
 import edu.java.response.GitResponse;
@@ -40,9 +40,8 @@ public class LinkUpdaterScheduler {
     @Value("${app.scheduler.force-check-delay}")
     private int forceCheckDelay;
 
-    private Response response;
-    private GitResponse gitResponse;
-    private StackResponse stackResponse;
+    private final GitResponse gitResponse = new GitResponse();
+    private final StackResponse stackResponse = new StackResponse();
 
     @Scheduled(fixedDelayString = "${app.scheduler.interval}")
     void update() {
@@ -62,6 +61,7 @@ public class LinkUpdaterScheduler {
             String identification;
             String rowData;
 
+            Response response;
             switch (host) {
                 case "github.com" -> {
                     client = gitHubClient;
