@@ -6,7 +6,7 @@
     <parent>
         <groupId>edu.java</groupId>
         <artifactId>root</artifactId>
-        <version>0.1</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>scrapper-jooq</artifactId>
