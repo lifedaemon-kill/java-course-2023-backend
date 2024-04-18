@@ -54,12 +54,12 @@ public class JooqChatRepository implements ChatRepository {
 
     @Override
     public Chat findById(Long id) {
-        @Nullable ChatRecord record = dslContext.selectFrom(Tables.CHAT)
+        @Nullable ChatRecord chatRecord = dslContext.selectFrom(Tables.CHAT)
             .where(Tables.CHAT.TG_CHAT_ID.eq(id))
             .fetchOne();
 
-        if (record != null) {
-            return record.into(Chat.class);
+        if (chatRecord != null) {
+            return chatRecord.into(Chat.class);
         } else {
             return null;
         }

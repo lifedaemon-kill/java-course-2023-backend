@@ -63,6 +63,7 @@ public class JdbcLinkService extends JdbcUtilityService implements LinkService {
 
         return new LinkResponse(id, request.link());
     }
+
     @Override
     public LinkResponse deleteLinkTracking(Long id, URI url) {
         if (!isChatExist(id)) {
@@ -88,6 +89,7 @@ public class JdbcLinkService extends JdbcUtilityService implements LinkService {
 
         return new LinkResponse(id, url);
     }
+
     @Override
     public ListLinksResponse getLinks(Long id) {
         if (!isChatExist(id)) {

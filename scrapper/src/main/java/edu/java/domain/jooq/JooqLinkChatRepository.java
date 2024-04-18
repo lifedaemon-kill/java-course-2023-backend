@@ -50,7 +50,7 @@ public class JooqLinkChatRepository implements LinkChatRepository {
                 .join(Tables.LINKSCHATS)
                 .on(Tables.LINK.ID.eq(Tables.LINKSCHATS.URL_ID))
                 .fetch()
-                .map(record -> URI.create(record.value1()));
+                .map(recordUri -> URI.create(recordUri.value1()));
         } catch (Exception e) {
             return null;
         }
@@ -65,7 +65,7 @@ public class JooqLinkChatRepository implements LinkChatRepository {
                 .on(Tables.LINK.ID.eq(Tables.LINKSCHATS.URL_ID))
                 .where(Tables.LINKSCHATS.TG_CHAT_ID.eq(chatId))
                 .fetch()
-                .map(record -> URI.create(record.value1()));
+                .map(recordUri -> URI.create(recordUri.value1()));
 
         } catch (Exception e) {
             return null;
@@ -82,14 +82,14 @@ public class JooqLinkChatRepository implements LinkChatRepository {
 
     @Override
     public LinkChat findOne(Long urlId, Long tgChatId) {
-        var record = dslContext.select()
+        var recordLinkChat = dslContext.select()
             .from(Tables.LINKSCHATS)
             .where(Tables.LINKSCHATS.TG_CHAT_ID.eq(tgChatId)
                 .and(Tables.LINKSCHATS.URL_ID.eq(urlId)))
             .fetchOne();
 
-        if (record != null) {
-            return record.into(LinkChat.class);
+        if (recordLinkChat != null) {
+            return recordLinkChat.into(LinkChat.class);
         }
         return null;
     }
