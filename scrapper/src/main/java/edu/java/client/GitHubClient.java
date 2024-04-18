@@ -40,8 +40,24 @@ public class GitHubClient extends Client {
     @Override
     public String getRepositoryIDFromLink(String link) {
         //https://github.com/me/myrepos/... -> /me/myrepos/...
+        int start = link.indexOf("/", link.indexOf("//") + 2) + 1;
+        if (start == 0) {
+            return null;
+        }
 
-        String sub = link.substring(link.indexOf("/", link.indexOf("//") + 2) + 1);
+        int subend = link.indexOf("/", start);
+        if (subend == -1) {
+            subend = link.length();
+        }
+
+        int end = link.indexOf("/", subend + 1);
+        if (end == -1) {
+            end = link.length();
+        }
+
+        String sub = link.substring(start, end);
+        log.debug("target id = {}", sub);
+
         if (!sub.isEmpty()) {
             return sub;
         } else {
