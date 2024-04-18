@@ -5,25 +5,27 @@ import api.exception.NotFoundException;
 import dto.request.ChangeDialogStateRequest;
 import dto.response.DialogStateResponse;
 import edu.java.api.service.interfaces.ChatService;
-import edu.java.domain.interfaces.ChatRepository;
-import edu.java.domain.interfaces.LinkChatRepository;
-import edu.java.domain.interfaces.LinkRepository;
+import edu.java.domain.jdbc.JdbcChatRepository;
+import edu.java.domain.jdbc.JdbcLinkChatRepository;
+import edu.java.domain.jdbc.JdbcLinkRepository;
 import edu.java.entity.Chat;
 import model.DialogState;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+@Primary
 @Service
 public class JdbcChatService extends JdbcUtilityService implements ChatService {
     @Autowired
-    private ChatRepository chatRepository;
+    private JdbcChatRepository chatRepository;
     @Autowired
-    protected LinkRepository linkRepository;
+    protected JdbcLinkRepository linkRepository;
     @Autowired
-    protected LinkChatRepository relationRepository;
+    protected JdbcLinkChatRepository relationRepository;
 
-    //Chat
+    @Override
     public ResponseEntity<Object> registerChat(Long id) {
         if (isChatExist(id)) {
             throw new AlreadyRegisteredException();
@@ -32,6 +34,7 @@ public class JdbcChatService extends JdbcUtilityService implements ChatService {
         return ResponseEntity.ok().build();
     }
 
+    @Override
     public ResponseEntity<Object> deleteChat(Long id) {
         if (!isChatExist(id)) {
             throw new NotFoundException();
@@ -40,6 +43,7 @@ public class JdbcChatService extends JdbcUtilityService implements ChatService {
         return ResponseEntity.ok().build();
     }
 
+    @Override
     public DialogStateResponse getDialogState(Long id) {
         if (!isChatExist(id)) {
             throw new NotFoundException();
@@ -50,6 +54,7 @@ public class JdbcChatService extends JdbcUtilityService implements ChatService {
         return new DialogStateResponse(id, state);
     }
 
+    @Override
     public DialogStateResponse changeDialogState(Long id, ChangeDialogStateRequest dialogStateRequest) {
         if (!isChatExist(id)) {
             throw new NotFoundException();
