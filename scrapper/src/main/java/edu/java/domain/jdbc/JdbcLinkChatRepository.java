@@ -1,14 +1,16 @@
 package edu.java.domain.jdbc;
 
-import edu.java.domain.repository.LinkChatRepository;
+import edu.java.domain.interfaces.LinkChatRepository;
 import edu.java.entity.LinkChat;
 import java.net.URI;
 import java.util.Collection;
 import javax.sql.DataSource;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+@Primary
 @SuppressWarnings("MultipleStringLiterals")
 @Repository
 public class JdbcLinkChatRepository implements LinkChatRepository {

@@ -1,8 +1,8 @@
 package edu.java.domain.jooq;
 
+import edu.java.domain.interfaces.ChatRepository;
 import edu.java.domain.jooq.codegen.Tables;
 import edu.java.domain.jooq.codegen.tables.records.ChatRecord;
-import edu.java.domain.repository.ChatRepository;
 import edu.java.entity.Chat;
 import java.time.OffsetDateTime;
 import java.util.Collection;

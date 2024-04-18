@@ -1,15 +1,17 @@
 package edu.java.domain.jdbc;
 
-import edu.java.domain.repository.LinkRepository;
+import edu.java.domain.interfaces.LinkRepository;
 import edu.java.entity.Link;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.OffsetDateTime;
 import java.util.Collection;
 import javax.sql.DataSource;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+@Primary
 @SuppressWarnings("MultipleStringLiterals")
 @Repository
 public class JdbcLinkRepository implements LinkRepository {

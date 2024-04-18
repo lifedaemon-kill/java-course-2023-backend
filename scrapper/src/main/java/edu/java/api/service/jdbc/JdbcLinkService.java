@@ -1,4 +1,4 @@
-package edu.java.api.service;
+package edu.java.api.service.jdbc;
 
 import api.exception.DataBaseNoConnectedException;
 import api.exception.LinkAlreadyAddedException;
@@ -6,20 +6,27 @@ import api.exception.NotFoundException;
 import dto.request.AddLinkRequest;
 import dto.response.LinkResponse;
 import dto.response.ListLinksResponse;
+import edu.java.domain.jdbc.JdbcLinkChatRepository;
+import edu.java.domain.jdbc.JdbcLinkRepository;
 import edu.java.entity.Link;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 @Log4j2
 @Service
-public class LinkApiService extends AbstractApiService {
-    //Link
+public class JdbcLinkService extends JdbcUtilityService {
+    @Autowired
+    protected JdbcLinkRepository linkRepository;
+    @Autowired
+    protected JdbcLinkChatRepository relationRepository;
 
+    //Link
     public LinkResponse addLinkTracking(Long id, AddLinkRequest request) {
         URI link = request.link();
         if (!isChatExist(id)) {

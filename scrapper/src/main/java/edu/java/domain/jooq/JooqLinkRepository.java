@@ -1,7 +1,7 @@
 package edu.java.domain.jooq;
 
+import edu.java.domain.interfaces.LinkRepository;
 import edu.java.domain.jooq.codegen.Tables;
-import edu.java.domain.repository.LinkRepository;
 import edu.java.entity.Link;
 import java.net.URI;
 import java.time.OffsetDateTime;

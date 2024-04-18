@@ -1,16 +1,28 @@
-package edu.java.api.service;
+package edu.java.api.service.jdbc;
 
 import api.exception.AlreadyRegisteredException;
 import api.exception.NotFoundException;
 import dto.request.ChangeDialogStateRequest;
 import dto.response.DialogStateResponse;
+import edu.java.api.service.interfaces.ChatService;
+import edu.java.domain.interfaces.ChatRepository;
+import edu.java.domain.interfaces.LinkChatRepository;
+import edu.java.domain.interfaces.LinkRepository;
 import edu.java.entity.Chat;
 import model.DialogState;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ChatApiService extends AbstractApiService {
+public class JdbcChatService extends JdbcUtilityService implements ChatService {
+    @Autowired
+    private ChatRepository chatRepository;
+    @Autowired
+    protected LinkRepository linkRepository;
+    @Autowired
+    protected LinkChatRepository relationRepository;
+
     //Chat
     public ResponseEntity<Object> registerChat(Long id) {
         if (isChatExist(id)) {

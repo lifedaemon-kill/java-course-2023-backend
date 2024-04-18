@@ -1,7 +1,7 @@
 package edu.java.domain.jooq;
 
+import edu.java.domain.interfaces.LinkChatRepository;
 import edu.java.domain.jooq.codegen.Tables;
-import edu.java.domain.repository.LinkChatRepository;
 import edu.java.entity.LinkChat;
 import java.net.URI;
 import java.util.Collection;
