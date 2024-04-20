@@ -19,7 +19,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 @Log4j2
-
 public class JooqLinkService implements LinkService {
     private final JooqChatRepository chatRepository;
     protected final JooqLinkRepository linkRepository;

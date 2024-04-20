@@ -9,9 +9,7 @@ import edu.java.domain.jpa.JpaChatRepository;
 import edu.java.entity.Chat;
 import model.DialogState;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 
-@Service
 public class JpaChatService implements ChatService {
     protected JpaChatRepository chatRepository;
 
