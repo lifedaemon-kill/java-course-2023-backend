@@ -1,22 +1,24 @@
 package edu.java.domain.jpa;
 
-import edu.java.domain.interfaces.LinkChatRepository;
+import edu.java.domain.interfaces.SubscriptionRepository;
 import edu.java.entity.LinkChat;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import java.net.URI;
 import java.util.Collection;
 import java.util.List;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.stereotype.Repository;
 
 @Log4j2
 @SuppressWarnings("MultipleStringLiterals")
-@Repository
-public class JpaLinkChatRepository implements LinkChatRepository {
-    @PersistenceContext
-    private EntityManager em;
+
+public class JpaSubscriptionRepository implements SubscriptionRepository {
+
+    private final EntityManager em;
+
+    public JpaSubscriptionRepository(EntityManager em) {
+        this.em = em;
+    }
 
     @Override
     public void add(Long urlId, Long chatId) {

@@ -6,22 +6,20 @@ import dto.request.ChangeDialogStateRequest;
 import dto.response.DialogStateResponse;
 import edu.java.api.service.interfaces.ChatService;
 import edu.java.domain.jooq.JooqChatRepository;
-import edu.java.domain.jooq.JooqLinkChatRepository;
-import edu.java.domain.jooq.JooqLinkRepository;
 import edu.java.entity.Chat;
 import model.DialogState;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 
-@Service
-public class JooqChatService extends JooqUtilityService implements ChatService {
-    @Autowired
-    private JooqChatRepository chatRepository;
-    @Autowired
-    protected JooqLinkRepository linkRepository;
-    @Autowired
-    protected JooqLinkChatRepository relationRepository;
+public class JooqChatService implements ChatService {
+    private final JooqChatRepository chatRepository;
+
+    public JooqChatService(JooqChatRepository chatRepository) {
+        this.chatRepository = chatRepository;
+    }
+
+    public boolean isChatExist(Long id) {
+        return chatRepository.findById(id) != null;
+    }
 
     @Override
     public ResponseEntity<Object> registerChat(Long id) {

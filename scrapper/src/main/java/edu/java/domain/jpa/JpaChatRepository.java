@@ -3,17 +3,17 @@ package edu.java.domain.jpa;
 import edu.java.domain.interfaces.ChatRepository;
 import edu.java.entity.Chat;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import java.time.OffsetDateTime;
 import java.util.Collection;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.stereotype.Repository;
 
 @Log4j2
-@Repository
 public class JpaChatRepository implements ChatRepository {
-    @PersistenceContext
-    private EntityManager em;
+    private final EntityManager em;
+
+    public JpaChatRepository(EntityManager em) {
+        this.em = em;
+    }
 
     @Override
     public void add(Long id) {

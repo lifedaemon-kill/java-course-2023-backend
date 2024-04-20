@@ -6,22 +6,22 @@ import dto.request.ChangeDialogStateRequest;
 import dto.response.DialogStateResponse;
 import edu.java.api.service.interfaces.ChatService;
 import edu.java.domain.jpa.JpaChatRepository;
-import edu.java.domain.jpa.JpaLinkChatRepository;
-import edu.java.domain.jpa.JpaLinkRepository;
 import edu.java.entity.Chat;
 import model.DialogState;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JpaChatService extends JpaUtilityService implements ChatService {
-    @Autowired
+public class JpaChatService implements ChatService {
     protected JpaChatRepository chatRepository;
-    @Autowired
-    protected JpaLinkRepository linkRepository;
-    @Autowired
-    protected JpaLinkChatRepository relationRepository;
+
+    public JpaChatService(JpaChatRepository chatRepository) {
+        this.chatRepository = chatRepository;
+    }
+
+    public boolean isChatExist(Long id) {
+        return chatRepository.findById(id) != null;
+    }
 
     @Override
     public ResponseEntity<Object> registerChat(Long id) {

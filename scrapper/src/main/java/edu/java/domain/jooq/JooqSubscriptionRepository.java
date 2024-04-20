@@ -1,22 +1,18 @@
 package edu.java.domain.jooq;
 
-import edu.java.domain.interfaces.LinkChatRepository;
+import edu.java.domain.interfaces.SubscriptionRepository;
 import edu.java.domain.jooq.codegen.Tables;
 import edu.java.entity.LinkChat;
 import java.net.URI;
 import java.util.Collection;
-import javax.sql.DataSource;
 import org.jooq.DSLContext;
-import org.jooq.SQLDialect;
-import org.jooq.impl.DSL;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public class JooqLinkChatRepository implements LinkChatRepository {
+public class JooqSubscriptionRepository implements SubscriptionRepository {
     private final DSLContext dslContext;
 
-    public JooqLinkChatRepository(DataSource dataSource) {
-        this.dslContext = DSL.using(dataSource, SQLDialect.POSTGRES);
+    public JooqSubscriptionRepository(DSLContext manager) {
+        this.dslContext = manager;
     }
 
     @Override

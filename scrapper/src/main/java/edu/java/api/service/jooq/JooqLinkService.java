@@ -7,25 +7,37 @@ import dto.request.AddLinkRequest;
 import dto.response.LinkResponse;
 import dto.response.ListLinksResponse;
 import edu.java.api.service.interfaces.LinkService;
-import edu.java.domain.jooq.JooqLinkChatRepository;
+import edu.java.domain.jooq.JooqChatRepository;
 import edu.java.domain.jooq.JooqLinkRepository;
+import edu.java.domain.jooq.JooqSubscriptionRepository;
 import edu.java.entity.Link;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Service;
 
 @Log4j2
-@Service
-public class JooqLinkService extends JooqUtilityService implements LinkService {
-    @Autowired
-    protected JooqLinkRepository linkRepository;
-    @Autowired
-    protected JooqLinkChatRepository relationRepository;
+
+public class JooqLinkService implements LinkService {
+    private final JooqChatRepository chatRepository;
+    protected final JooqLinkRepository linkRepository;
+    protected final JooqSubscriptionRepository relationRepository;
+
+    public JooqLinkService(
+        JooqChatRepository chatRepository,
+        JooqLinkRepository linkRepository,
+        JooqSubscriptionRepository relationRepository
+    ) {
+        this.chatRepository = chatRepository;
+        this.linkRepository = linkRepository;
+        this.relationRepository = relationRepository;
+    }
+
+    public boolean isChatExist(Long id) {
+        return chatRepository.findById(id) != null;
+    }
 
     @Override
     public LinkResponse addLinkTracking(Long id, AddLinkRequest request) {

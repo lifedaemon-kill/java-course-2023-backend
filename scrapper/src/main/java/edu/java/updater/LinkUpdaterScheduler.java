@@ -4,7 +4,7 @@ import edu.java.api.httpclient.ScrapperHttpClientService;
 import edu.java.client.Client;
 import edu.java.client.GitHubClient;
 import edu.java.client.StackOverFlowClient;
-import edu.java.domain.interfaces.LinkChatRepository;
+import edu.java.domain.interfaces.SubscriptionRepository;
 import edu.java.domain.interfaces.LinkRepository;
 import edu.java.entity.Link;
 import edu.java.entity.TopicState;
@@ -36,7 +36,7 @@ public class LinkUpdaterScheduler {
     @Autowired
     private LinkRepository linkRepository;
     @Autowired
-    private LinkChatRepository relationRepository;
+    private SubscriptionRepository relationRepository;
     @Value("${app.scheduler.force-check-delay}")
     private int forceCheckDelay;
 

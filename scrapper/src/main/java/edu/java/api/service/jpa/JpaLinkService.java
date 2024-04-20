@@ -7,25 +7,36 @@ import dto.request.AddLinkRequest;
 import dto.response.LinkResponse;
 import dto.response.ListLinksResponse;
 import edu.java.api.service.interfaces.LinkService;
-import edu.java.domain.jpa.JpaLinkChatRepository;
+import edu.java.domain.jpa.JpaChatRepository;
 import edu.java.domain.jpa.JpaLinkRepository;
+import edu.java.domain.jpa.JpaSubscriptionRepository;
 import edu.java.entity.Link;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Service;
 
 @Log4j2
-@Service
-public class JpaLinkService extends JpaUtilityService implements LinkService {
-    @Autowired
+public class JpaLinkService implements LinkService {
+    protected JpaChatRepository chatRepository;
     protected JpaLinkRepository linkRepository;
-    @Autowired
-    protected JpaLinkChatRepository relationRepository;
+    protected JpaSubscriptionRepository relationRepository;
+
+    public JpaLinkService(
+        JpaChatRepository chatRepository,
+        JpaLinkRepository linkRepository,
+        JpaSubscriptionRepository relationRepository
+    ) {
+        this.chatRepository = chatRepository;
+        this.linkRepository = linkRepository;
+        this.relationRepository = relationRepository;
+    }
+
+    public boolean isChatExist(Long id) {
+        return chatRepository.findById(id) != null;
+    }
 
     @Override
     public LinkResponse addLinkTracking(Long id, AddLinkRequest request) {
