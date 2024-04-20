@@ -7,7 +7,6 @@ import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.Collection;
 import org.jooq.DSLContext;
-import org.springframework.stereotype.Repository;
 
 public class JooqLinkRepository implements LinkRepository {
     private final DSLContext dslContext;

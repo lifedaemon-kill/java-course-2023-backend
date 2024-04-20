@@ -9,8 +9,6 @@ import dto.response.LinkResponse;
 import dto.response.ListLinksResponse;
 import edu.java.api.service.interfaces.ChatService;
 import edu.java.api.service.interfaces.LinkService;
-import edu.java.api.service.jdbc.JdbcChatService;
-import edu.java.api.service.jdbc.JdbcLinkService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.net.URI;

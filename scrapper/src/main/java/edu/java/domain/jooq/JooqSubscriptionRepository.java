@@ -6,7 +6,6 @@ import edu.java.entity.LinkChat;
 import java.net.URI;
 import java.util.Collection;
 import org.jooq.DSLContext;
-import org.springframework.stereotype.Repository;
 
 public class JooqSubscriptionRepository implements SubscriptionRepository {
     private final DSLContext dslContext;
