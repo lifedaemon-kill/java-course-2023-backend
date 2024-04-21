@@ -2,12 +2,12 @@ package edu.java.bot.handler;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Update;
-import edu.java.bot.httpclient.BotClientService;
 import edu.java.bot.command.DeleteLinkSetUpCommand;
 import edu.java.bot.command.HelpCommand;
 import edu.java.bot.command.ListCommand;
 import edu.java.bot.command.TrackSetUpCommand;
 import edu.java.bot.command.WrongCommand;
+import edu.java.bot.httpclient.BotClientService;
 import static edu.java.bot.utility.CommandArchive.HELP;
 import static edu.java.bot.utility.CommandArchive.LIST;
 import static edu.java.bot.utility.CommandArchive.TRACK;
