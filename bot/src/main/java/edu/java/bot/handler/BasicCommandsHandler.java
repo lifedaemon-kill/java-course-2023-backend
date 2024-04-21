@@ -2,7 +2,7 @@ package edu.java.bot.handler;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Update;
-import edu.java.bot.api.BotClientService;
+import edu.java.bot.httpclient.BotClientService;
 import edu.java.bot.command.DeleteLinkSetUpCommand;
 import edu.java.bot.command.HelpCommand;
 import edu.java.bot.command.ListCommand;

@@ -2,7 +2,7 @@ package edu.java.bot.configuration;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
-import edu.java.bot.api.BotClientService;
+import edu.java.bot.httpclient.BotClientService;
 import edu.java.bot.controller.UpdatesController;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;

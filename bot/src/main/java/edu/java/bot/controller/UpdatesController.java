@@ -4,7 +4,7 @@ import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import dto.response.DialogStateResponse;
-import edu.java.bot.api.BotClientService;
+import edu.java.bot.httpclient.BotClientService;
 import edu.java.bot.command.DeleteLinkCommand;
 import edu.java.bot.command.NotAutorizedCommand;
 import edu.java.bot.command.StartCommand;
