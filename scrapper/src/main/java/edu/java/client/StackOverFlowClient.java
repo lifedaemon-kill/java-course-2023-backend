@@ -1,7 +1,5 @@
 package edu.java.client;
 
-import edu.java.entity.TopicState;
-import edu.java.response.StackResponse;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.springframework.stereotype.Component;
@@ -23,12 +21,6 @@ public class StackOverFlowClient extends Client {
             .retrieve()
             .bodyToMono(String.class)
             .block();
-    }
-
-    @Override
-    public TopicState getPayloadData(String json) {
-        StackResponse response = new StackResponse(json);
-        return response.getData();
     }
 
     @Override

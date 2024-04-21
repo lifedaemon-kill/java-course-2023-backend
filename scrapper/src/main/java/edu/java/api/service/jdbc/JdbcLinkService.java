@@ -1,4 +1,4 @@
-package edu.java.api.service;
+package edu.java.api.service.jdbc;
 
 import api.exception.DataBaseNoConnectedException;
 import api.exception.LinkAlreadyAddedException;
@@ -6,6 +6,10 @@ import api.exception.NotFoundException;
 import dto.request.AddLinkRequest;
 import dto.response.LinkResponse;
 import dto.response.ListLinksResponse;
+import edu.java.api.service.interfaces.LinkService;
+import edu.java.domain.jdbc.JdbcChatRepository;
+import edu.java.domain.jdbc.JdbcLinkRepository;
+import edu.java.domain.jdbc.JdbcSubscriptionRepository;
 import edu.java.entity.Link;
 import java.net.URI;
 import java.util.ArrayList;
@@ -13,13 +17,28 @@ import java.util.List;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Service;
 
 @Log4j2
-@Service
-public class LinkApiService extends AbstractApiService {
-    //Link
+public class JdbcLinkService implements LinkService {
+    protected JdbcChatRepository chatRepository;
+    protected JdbcLinkRepository linkRepository;
+    protected JdbcSubscriptionRepository relationRepository;
 
+    public JdbcLinkService(
+        JdbcChatRepository chatRepository,
+        JdbcLinkRepository linkRepository,
+        JdbcSubscriptionRepository relationRepository
+    ) {
+        this.chatRepository = chatRepository;
+        this.linkRepository = linkRepository;
+        this.relationRepository = relationRepository;
+    }
+
+    public boolean isChatExist(Long id) {
+        return chatRepository.findById(id) != null;
+    }
+
+    @Override
     public LinkResponse addLinkTracking(Long id, AddLinkRequest request) {
         URI link = request.link();
         if (!isChatExist(id)) {
@@ -56,6 +75,7 @@ public class LinkApiService extends AbstractApiService {
         return new LinkResponse(id, request.link());
     }
 
+    @Override
     public LinkResponse deleteLinkTracking(Long id, URI url) {
         if (!isChatExist(id)) {
             throw new NotFoundException();
@@ -81,6 +101,7 @@ public class LinkApiService extends AbstractApiService {
         return new LinkResponse(id, url);
     }
 
+    @Override
     public ListLinksResponse getLinks(Long id) {
         if (!isChatExist(id)) {
             throw new NotFoundException();

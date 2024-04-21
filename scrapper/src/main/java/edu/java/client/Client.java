@@ -1,6 +1,5 @@
 package edu.java.client;
 
-import edu.java.entity.TopicState;
 import org.springframework.web.reactive.function.client.WebClient;
 
 public abstract class Client {
@@ -15,8 +14,6 @@ public abstract class Client {
     }
 
     public abstract String getRowData(String repository);
-
-    public abstract TopicState getPayloadData(String json);
 
     public abstract String getRepositoryIDFromLink(String link);
 }
