@@ -1,17 +1,31 @@
-package edu.java.api.service;
+package edu.java.api.service.jdbc;
 
 import api.exception.AlreadyRegisteredException;
 import api.exception.NotFoundException;
 import dto.request.ChangeDialogStateRequest;
 import dto.response.DialogStateResponse;
+import edu.java.api.service.interfaces.ChatService;
+import edu.java.domain.jdbc.JdbcChatRepository;
+import edu.java.domain.jdbc.JdbcLinkChatRepository;
+import edu.java.domain.jdbc.JdbcLinkRepository;
 import edu.java.entity.Chat;
 import model.DialogState;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+@Primary
 @Service
-public class ChatApiService extends AbstractApiService {
-    //Chat
+public class JdbcChatService extends JdbcUtilityService implements ChatService {
+    @Autowired
+    private JdbcChatRepository chatRepository;
+    @Autowired
+    protected JdbcLinkRepository linkRepository;
+    @Autowired
+    protected JdbcLinkChatRepository relationRepository;
+
+    @Override
     public ResponseEntity<Object> registerChat(Long id) {
         if (isChatExist(id)) {
             throw new AlreadyRegisteredException();
@@ -20,6 +34,7 @@ public class ChatApiService extends AbstractApiService {
         return ResponseEntity.ok().build();
     }
 
+    @Override
     public ResponseEntity<Object> deleteChat(Long id) {
         if (!isChatExist(id)) {
             throw new NotFoundException();
@@ -28,6 +43,7 @@ public class ChatApiService extends AbstractApiService {
         return ResponseEntity.ok().build();
     }
 
+    @Override
     public DialogStateResponse getDialogState(Long id) {
         if (!isChatExist(id)) {
             throw new NotFoundException();
@@ -38,6 +54,7 @@ public class ChatApiService extends AbstractApiService {
         return new DialogStateResponse(id, state);
     }
 
+    @Override
     public DialogStateResponse changeDialogState(Long id, ChangeDialogStateRequest dialogStateRequest) {
         if (!isChatExist(id)) {
             throw new NotFoundException();

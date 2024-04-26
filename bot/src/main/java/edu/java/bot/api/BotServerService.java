@@ -17,9 +17,20 @@ public class BotServerService {
 
     public ResponseEntity<Object> linkContentUpdate(LinkUpdate linkUpdate) {
         for (Long id : linkUpdate.tgChatIds()) {
+            String text = switch (linkUpdate.event().eventType()) {
+                case BASIC -> String.format("Обновление по ссылке\n%s", linkUpdate.url().toString());
+
+                case GIT_BRANCH -> String.format("Появилась новая ветка по ссылке\n%s", linkUpdate.url().toString());
+                case GIT_PUSH -> String.format("Появился новый push по ссылке\n%s", linkUpdate.url().toString());
+                case GIT_COMMIT -> String.format("Появился новый commit по ссылке\n%s", linkUpdate.url().toString());
+                case GIT_PULL -> String.format("Появился новый pull по ссылке\n%s", linkUpdate.url().toString());
+
+                case STACK_ANSWER -> String.format("Появился новый ответ по ссылке\n%s", linkUpdate.url().toString());
+            };
+
             bot.execute(new SendMessage(
                 id,
-                String.format("Появился новый ответ по ссылке\n%s", linkUpdate.url().toString())
+                text
             ));
         }
         return ResponseEntity.status(HttpStatus.OK).build();
