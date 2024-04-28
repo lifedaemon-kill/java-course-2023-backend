@@ -1,23 +1,18 @@
 package edu.java.domain.jdbc;
 
-import edu.java.domain.interfaces.LinkChatRepository;
+import edu.java.domain.interfaces.SubscriptionRepository;
 import edu.java.entity.LinkChat;
 import java.net.URI;
 import java.util.Collection;
-import javax.sql.DataSource;
-import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
 
-@Primary
 @SuppressWarnings("MultipleStringLiterals")
-@Repository
-public class JdbcLinkChatRepository implements LinkChatRepository {
+public class JdbcSubscriptionRepository implements SubscriptionRepository {
     private final JdbcTemplate jdbcTemplate;
 
-    public JdbcLinkChatRepository(DataSource dataSource) {
-        jdbcTemplate = new JdbcTemplate(dataSource);
+    public JdbcSubscriptionRepository(JdbcTemplate manager) {
+        this.jdbcTemplate = manager;
     }
 
     @Override
