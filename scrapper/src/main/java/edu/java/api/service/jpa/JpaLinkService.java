@@ -1,4 +1,4 @@
-package edu.java.api.service.jdbc;
+package edu.java.api.service.jpa;
 
 import api.exception.DataBaseNoConnectedException;
 import api.exception.LinkAlreadyAddedException;
@@ -7,9 +7,9 @@ import dto.request.AddLinkRequest;
 import dto.response.LinkResponse;
 import dto.response.ListLinksResponse;
 import edu.java.api.service.interfaces.LinkService;
-import edu.java.domain.jdbc.JdbcChatRepository;
-import edu.java.domain.jdbc.JdbcLinkRepository;
-import edu.java.domain.jdbc.JdbcSubscriptionRepository;
+import edu.java.domain.jpa.JpaChatRepository;
+import edu.java.domain.jpa.JpaLinkRepository;
+import edu.java.domain.jpa.JpaSubscriptionRepository;
 import edu.java.entity.Link;
 import java.net.URI;
 import java.util.ArrayList;
@@ -19,15 +19,15 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 @Log4j2
-public class JdbcLinkService implements LinkService {
-    protected JdbcChatRepository chatRepository;
-    protected JdbcLinkRepository linkRepository;
-    protected JdbcSubscriptionRepository relationRepository;
+public class JpaLinkService implements LinkService {
+    protected JpaChatRepository chatRepository;
+    protected JpaLinkRepository linkRepository;
+    protected JpaSubscriptionRepository relationRepository;
 
-    public JdbcLinkService(
-        JdbcChatRepository chatRepository,
-        JdbcLinkRepository linkRepository,
-        JdbcSubscriptionRepository relationRepository
+    public JpaLinkService(
+        JpaChatRepository chatRepository,
+        JpaLinkRepository linkRepository,
+        JpaSubscriptionRepository relationRepository
     ) {
         this.chatRepository = chatRepository;
         this.linkRepository = linkRepository;
