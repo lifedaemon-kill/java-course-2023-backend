@@ -4,7 +4,7 @@ import edu.java.entity.LinkChat;
 import java.net.URI;
 import java.util.Collection;
 
-public interface LinkChatRepository {
+public interface SubscriptionRepository {
     void add(Long urlId, Long chatId);
 
     void remove(Long urlId, Long chatId);

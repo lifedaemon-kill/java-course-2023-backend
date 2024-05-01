@@ -6,19 +6,14 @@ import edu.java.domain.jooq.codegen.tables.records.ChatRecord;
 import edu.java.entity.Chat;
 import java.time.OffsetDateTime;
 import java.util.Collection;
-import javax.sql.DataSource;
 import org.jetbrains.annotations.Nullable;
 import org.jooq.DSLContext;
-import org.jooq.SQLDialect;
-import org.jooq.impl.DSL;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public class JooqChatRepository implements ChatRepository {
     private final DSLContext dslContext;
 
-    public JooqChatRepository(DataSource dataSource) {
-        this.dslContext = DSL.using(dataSource, SQLDialect.POSTGRES);
+    public JooqChatRepository(DSLContext manager) {
+        this.dslContext = manager;
     }
 
     @Override

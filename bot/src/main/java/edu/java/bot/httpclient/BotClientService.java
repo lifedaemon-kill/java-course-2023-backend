@@ -1,4 +1,4 @@
-package edu.java.bot.api;
+package edu.java.bot.httpclient;
 
 import dto.request.AddLinkRequest;
 import dto.request.ChangeDialogStateRequest;
@@ -6,7 +6,6 @@ import dto.response.DialogStateResponse;
 import dto.response.LinkResponse;
 import dto.response.ListLinksResponse;
 import edu.java.bot.configuration.BotHttpClientConfig;
-import edu.java.bot.httpclient.BotHttpClient;
 import java.net.URI;
 import lombok.extern.log4j.Log4j2;
 import model.DialogState;
