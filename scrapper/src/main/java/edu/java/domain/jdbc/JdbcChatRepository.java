@@ -6,20 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.OffsetDateTime;
 import java.util.Collection;
-import javax.sql.DataSource;
-import org.springframework.context.annotation.Primary;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Repository;
 
-@Primary
-@Repository
 public class JdbcChatRepository implements ChatRepository {
     private final JdbcTemplate jdbcTemplate;
 
-    public JdbcChatRepository(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    public JdbcChatRepository(JdbcTemplate manager) {
+        this.jdbcTemplate = manager;
     }
 
     @Override

@@ -7,8 +7,8 @@ import dto.request.ChangeDialogStateRequest;
 import dto.response.DialogStateResponse;
 import dto.response.LinkResponse;
 import dto.response.ListLinksResponse;
-import edu.java.api.service.jdbc.JdbcChatService;
-import edu.java.api.service.jdbc.JdbcLinkService;
+import edu.java.api.service.interfaces.ChatService;
+import edu.java.api.service.interfaces.LinkService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.net.URI;
@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ScrapperApiController {
-    private final JdbcChatService chatService;
-    private final JdbcLinkService linkService;
+    private final ChatService chatService;
+    private final LinkService linkService;
 
-    public ScrapperApiController(JdbcChatService chatService, JdbcLinkService linkService) {
+    public ScrapperApiController(ChatService chatService, LinkService linkService) {
         this.chatService = chatService;
         this.linkService = linkService;
     }

@@ -1,19 +1,19 @@
-package edu.java.api.service.jooq;
+package edu.java.api.service.jpa;
 
 import api.exception.AlreadyRegisteredException;
 import api.exception.NotFoundException;
 import dto.request.ChangeDialogStateRequest;
 import dto.response.DialogStateResponse;
 import edu.java.api.service.interfaces.ChatService;
-import edu.java.domain.jooq.JooqChatRepository;
+import edu.java.domain.jpa.JpaChatRepository;
 import edu.java.entity.Chat;
 import model.DialogState;
 import org.springframework.http.ResponseEntity;
 
-public class JooqChatService implements ChatService {
-    private final JooqChatRepository chatRepository;
+public class JpaChatService implements ChatService {
+    protected JpaChatRepository chatRepository;
 
-    public JooqChatService(JooqChatRepository chatRepository) {
+    public JpaChatService(JpaChatRepository chatRepository) {
         this.chatRepository = chatRepository;
     }
 

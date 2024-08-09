@@ -6,24 +6,22 @@ import dto.request.ChangeDialogStateRequest;
 import dto.response.DialogStateResponse;
 import edu.java.api.service.interfaces.ChatService;
 import edu.java.domain.jdbc.JdbcChatRepository;
-import edu.java.domain.jdbc.JdbcLinkChatRepository;
-import edu.java.domain.jdbc.JdbcLinkRepository;
 import edu.java.entity.Chat;
 import model.DialogState;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 
-@Primary
-@Service
-public class JdbcChatService extends JdbcUtilityService implements ChatService {
-    @Autowired
-    private JdbcChatRepository chatRepository;
-    @Autowired
-    protected JdbcLinkRepository linkRepository;
-    @Autowired
-    protected JdbcLinkChatRepository relationRepository;
+public class JdbcChatService implements ChatService {
+    protected final JdbcChatRepository chatRepository;
+
+    public JdbcChatService(
+        JdbcChatRepository chatRepository
+    ) {
+        this.chatRepository = chatRepository;
+    }
+
+    public boolean isChatExist(Long id) {
+        return chatRepository.findById(id) != null;
+    }
 
     @Override
     public ResponseEntity<Object> registerChat(Long id) {
